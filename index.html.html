@@ -1,0 +1,1926 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Saravanan K — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>/
+* ── OPTIMIZED SKILLS SECTION ── */
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 1.8rem;
+}
+
+.skill-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 2.25rem 2rem;
+  transition: all .35s cubic-bezier(.22,1,.36,1);
+  position: relative;
+  overflow: hidden;
+}
+
+.skill-card::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--blue), var(--cyan));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .4s cubic-bezier(.22,1,.36,1);
+}
+
+.skill-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 45px rgba(27,58,92,.12);
+  border-color: var(--blue-light);
+}
+
+.skill-card:hover::after {
+  transform: scaleX(1);
+}
+
+.skill-icon {
+  font-size: 2.4rem;
+  margin-bottom: 1rem;
+  display: block;
+  line-height: 1;
+}
+
+.skill-cat {
+  font-family: 'DM Mono', monospace;
+  font-size: .7rem;
+  color: var(--blue);
+  text-transform: uppercase;
+  letter-spacing: .12em;
+  margin-bottom: .4rem;
+}
+
+.skill-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.45rem;
+  font-weight: 500;
+  color: var(--navy-mid);
+  line-height: 1.15;
+  margin-bottom: 1.25rem;
+}
+
+.skill-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .45rem;
+}
+
+.skill-tag {
+  font-size: .72rem;
+  padding: .35rem .7rem;
+  background: rgba(46,109,164,.06);
+  border: 1px solid rgba(46,109,164,.12);
+  border-radius: 4px;
+  color: var(--muted);
+  transition: all .2s;
+}
+
+.skill-card:hover .skill-tag {
+  background: rgba(91,184,212,.1);
+  border-color: rgba(91,184,212,.25);
+  color: var(--navy-mid);
+}
+
+/* Responsive */
+@media(max-width: 600px) {
+  .skill-card {
+    padding: 1.8rem 1.5rem;
+  }
+  .skills-grid {
+    gap: 1.4rem;
+  }
+}
+/* ══════════════════════════════════════════
+   DESIGN TOKENS
+══════════════════════════════════════════ */
+:root {
+  --navy:#0d1f35; --navy-mid:#1B3A5C; --blue:#2E6DA4;
+  --blue-light:#4A8FC4; --cyan:#5BB8D4;
+  --cream:#f5f2ec; --cream-dark:#ede9e1;
+  --text:#1a2b3c; --muted:#3a5568;
+  --white:#fff; --border:rgba(46,109,164,.15);
+  --glow:rgba(91,184,212,.2);
+}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--text);overflow-x:hidden}
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-track{background:var(--cream)}
+::-webkit-scrollbar-thumb{background:var(--blue);border-radius:2px}
+
+/* ── EDIT MODE TOGGLE BUTTON ── */
+#editToggleBtn {
+  position:fixed; bottom:2rem; right:2rem; z-index:9999;
+  width:56px; height:56px; border-radius:50%;
+  background:var(--blue); border:none; cursor:pointer;
+  box-shadow:0 8px 32px rgba(46,109,164,.45);
+  display:flex; align-items:center; justify-content:center;
+  transition:all .3s; color:#fff; font-size:1.3rem;
+}
+#editToggleBtn:hover{transform:scale(1.1); background:var(--cyan)}
+#editToggleBtn.active{background:#e74c3c; box-shadow:0 8px 32px rgba(231,76,60,.4)}
+
+/* ── EDITOR PANEL ── */
+#editorPanel {
+  position:fixed; top:0; right:0; bottom:0; z-index:9000;
+  width:420px; background:var(--navy);
+  border-left:1px solid rgba(91,184,212,.2);
+  transform:translateX(100%); transition:transform .4s cubic-bezier(.22,1,.36,1);
+  overflow-y:auto; display:flex; flex-direction:column;
+}
+#editorPanel.open{transform:translateX(0)}
+
+.ep-header {
+  padding:1.5rem 1.5rem 1rem;
+  border-bottom:1px solid rgba(255,255,255,.08);
+  position:sticky; top:0; background:var(--navy); z-index:10;
+}
+.ep-header h3{font-family:'DM Mono',monospace; font-size:.8rem; color:var(--cyan); letter-spacing:.15em; text-transform:uppercase}
+.ep-header p{font-size:.75rem; color:rgba(255,255,255,.4); margin-top:.25rem}
+
+.ep-body{padding:1rem 1.5rem 6rem; flex:1}
+
+/* section tabs */
+.ep-tabs{display:flex; flex-wrap:wrap; gap:.4rem; margin-bottom:1.2rem}
+.ep-tab{
+  font-family:'DM Mono',monospace; font-size:.65rem; letter-spacing:.08em;
+  text-transform:uppercase; padding:.35rem .75rem; border-radius:2px;
+  border:1px solid rgba(255,255,255,.12); color:rgba(255,255,255,.5);
+  cursor:pointer; background:transparent; transition:all .2s;
+}
+.ep-tab.active{background:var(--blue); color:#fff; border-color:var(--blue)}
+.ep-tab:hover:not(.active){border-color:var(--cyan); color:var(--cyan)}
+
+/* section panels */
+.ep-section{display:none}
+.ep-section.active{display:block}
+
+/* field groups */
+.ep-group{margin-bottom:1.2rem}
+.ep-label{
+  font-family:'DM Mono',monospace; font-size:.62rem; color:var(--cyan);
+  text-transform:uppercase; letter-spacing:.12em; margin-bottom:.4rem; display:block;
+}
+.ep-input, .ep-textarea, .ep-select {
+  width:100%; background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.1); border-radius:4px;
+  color:#fff; font-family:'Outfit',sans-serif; font-size:.82rem;
+  padding:.55rem .75rem; outline:none; transition:border .2s;
+}
+.ep-input:focus,.ep-textarea:focus{border-color:var(--cyan)}
+.ep-textarea{resize:vertical; min-height:80px; line-height:1.6}
+
+/* image upload zones */
+.img-upload-zone {
+  border:2px dashed rgba(91,184,212,.3); border-radius:6px;
+  padding:1.5rem; text-align:center; cursor:pointer;
+  transition:all .25s; position:relative; overflow:hidden;
+}
+.img-upload-zone:hover{border-color:var(--cyan); background:rgba(91,184,212,.05)}
+.img-upload-zone input[type=file]{
+  position:absolute; inset:0; opacity:0; cursor:pointer; width:100%; height:100%;
+}
+.img-upload-zone .zone-icon{font-size:1.8rem; margin-bottom:.5rem}
+.img-upload-zone p{font-size:.72rem; color:rgba(255,255,255,.4)}
+.img-upload-zone .zone-preview{
+  width:100%; max-height:140px; object-fit:cover; border-radius:4px;
+  margin-bottom:.5rem; display:none;
+}
+
+/* repeatable item */
+.ep-repeat-item {
+  background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.08);
+  border-radius:6px; padding:1rem; margin-bottom:.8rem; position:relative;
+}
+.ep-repeat-item .remove-btn {
+  position:absolute; top:.6rem; right:.6rem;
+  background:rgba(231,76,60,.2); border:none; color:#e74c3c;
+  width:22px; height:22px; border-radius:50%; cursor:pointer;
+  font-size:.75rem; display:flex; align-items:center; justify-content:center;
+}
+.ep-add-btn {
+  width:100%; padding:.6rem; background:transparent;
+  border:1px dashed rgba(91,184,212,.3); border-radius:4px;
+  color:var(--cyan); font-family:'DM Mono',monospace; font-size:.7rem;
+  letter-spacing:.1em; text-transform:uppercase; cursor:pointer;
+  transition:all .2s; margin-top:.5rem;
+}
+.ep-add-btn:hover{background:rgba(91,184,212,.08); border-color:var(--cyan)}
+
+/* save/export */
+.ep-actions{
+  position:sticky; bottom:0; padding:1rem 1.5rem;
+  background:var(--navy); border-top:1px solid rgba(255,255,255,.08);
+  display:flex; gap:.6rem;
+}
+.ep-save-btn{
+  flex:1; padding:.7rem; background:var(--blue); border:none; border-radius:4px;
+  color:#fff; font-family:'DM Mono',monospace; font-size:.72rem;
+  letter-spacing:.1em; text-transform:uppercase; cursor:pointer; transition:all .2s;
+}
+.ep-save-btn:hover{background:var(--blue-light)}
+.ep-export-btn{
+  flex:1; padding:.7rem; background:transparent;
+  border:1px solid rgba(91,184,212,.3); border-radius:4px;
+  color:var(--cyan); font-family:'DM Mono',monospace; font-size:.72rem;
+  letter-spacing:.1em; text-transform:uppercase; cursor:pointer; transition:all .2s;
+}
+.ep-export-btn:hover{background:rgba(91,184,212,.08)}
+
+/* edit mode highlight */
+body.edit-mode [data-editable]{
+  outline:2px dashed rgba(91,184,212,.35); outline-offset:2px;
+  cursor:pointer; transition:outline .2s;
+}
+body.edit-mode [data-editable]:hover{outline-color:var(--cyan)}
+
+/* toast */
+#toast{
+  position:fixed; bottom:6rem; left:50%; transform:translateX(-50%) translateY(20px);
+  background:var(--cyan); color:var(--navy); padding:.6rem 1.5rem;
+  border-radius:4px; font-family:'DM Mono',monospace; font-size:.72rem;
+  letter-spacing:.1em; opacity:0; transition:all .3s; pointer-events:none; z-index:9999;
+}
+#toast.show{opacity:1; transform:translateX(-50%) translateY(0)}
+
+/* ══════════════════════════════════════════
+   NAV
+══════════════════════════════════════════ */
+nav {
+  position:fixed; top:0; left:0; right:0; z-index:100;
+  padding:1.2rem 3rem;
+  display:flex; align-items:center; justify-content:space-between;
+  background:rgba(245,242,236,.88); backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--border); transition:all .3s;
+}
+nav.scrolled{padding:.8rem 3rem; background:rgba(245,242,236,.97); box-shadow:0 2px 24px rgba(27,58,92,.08)}
+.nav-logo{font-family:'DM Mono',monospace; font-size:.85rem; color:var(--blue); letter-spacing:.15em; text-transform:uppercase}
+.nav-links{display:flex; gap:2.5rem; list-style:none}
+.nav-links a{font-family:'DM Mono',monospace; font-size:.75rem; color:var(--muted); text-decoration:none; letter-spacing:.1em; text-transform:uppercase; transition:color .25s; position:relative}
+.nav-links a::after{content:''; position:absolute; bottom:-4px; left:0; width:0; height:1px; background:var(--blue); transition:width .25s}
+.nav-links a:hover{color:var(--blue)}
+.nav-links a:hover::after{width:100%}
+.nav-toggle{display:none; flex-direction:column; gap:5px; cursor:pointer}
+.nav-toggle span{width:24px; height:1.5px; background:var(--navy); display:block; transition:all .3s}
+
+/* ══════════════════════════════════════════
+   HERO
+══════════════════════════════════════════ */
+#hero {
+  min-height:100vh; display:flex; align-items:center;
+  position:relative; overflow:hidden; padding:7rem 3rem 4rem;
+  background:var(--navy);
+}
+#hero::before {
+  content:''; position:absolute; inset:0;
+  background-image:linear-gradient(rgba(46,109,164,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(46,109,164,.06) 1px,transparent 1px);
+  background-size:60px 60px;
+  mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,black 40%,transparent 100%);
+}
+.orb{position:absolute; border-radius:50%; filter:blur(80px); animation:float 8s ease-in-out infinite}
+.orb-1{width:400px; height:400px; background:rgba(46,109,164,.25); top:-100px; right:10%; animation-delay:0s}
+.orb-2{width:250px; height:250px; background:rgba(91,184,212,.15); bottom:10%; left:5%; animation-delay:-3s}
+@keyframes float{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-30px) scale(1.05)}}
+
+.hero-layout{
+  position:relative; z-index:2;
+  display:grid; grid-template-columns:1fr auto;
+  gap:4rem; align-items:center; width:100%; max-width:1100px;
+}
+
+/* PROFILE PHOTO SLOT */
+.hero-photo-slot {
+  width:320px; height:420px; border-radius:8px;
+  border:2px dashed rgba(91,184,212,.4);
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  position:relative; overflow:hidden; cursor:pointer;
+  background:rgba(255,255,255,.03); transition:all .3s; flex-shrink:0;
+}
+.hero-photo-slot:hover{border-color:var(--cyan); background:rgba(91,184,212,.06)}
+.hero-photo-slot input[type=file]{position:absolute; inset:0; opacity:0; cursor:pointer; z-index:2}
+.hero-photo-slot img#profileImg{
+  position:absolute; inset:0; width:100%; height:100%;
+  object-fit:cover; object-position:center top; display:none; border-radius:6px;
+}
+.hero-photo-slot .slot-placeholder{
+  display:flex; flex-direction:column; align-items:center; gap:.5rem;
+  color:rgba(255,255,255,.3); text-align:center; padding:1rem;
+}
+.hero-photo-slot .slot-placeholder .slot-icon{font-size:2.5rem}
+.hero-photo-slot .slot-placeholder p{font-family:'DM Mono',monospace; font-size:.65rem; letter-spacing:.1em; text-transform:uppercase}
+
+.hero-photo-frame {
+  position:absolute; inset:0; border-radius:6px;
+  background: linear-gradient(135deg, rgba(46,109,164,.15), rgba(91,184,212,.08));
+  z-index:0;
+}
+
+.hero-content{position:relative; z-index:2}
+.hero-eyebrow{font-family:'DM Mono',monospace; font-size:.75rem; color:var(--cyan); letter-spacing:.2em; text-transform:uppercase; margin-bottom:1.5rem; opacity:0; animation:fadeUp .8s forwards .3s}
+.hero-name{font-family:'Cormorant Garamond',serif; font-size:clamp(2.5rem,5.5vw,5rem); font-weight:300; color:var(--white); line-height:.9; letter-spacing:-.02em; margin-bottom:1rem; opacity:0; animation:fadeUp .8s forwards .5s}
+.hero-name span{color:var(--cyan); font-style:italic}
+.hero-title{font-size:1.05rem; font-weight:400; color:rgba(255,255,255,.65); margin-bottom:.6rem; opacity:0; animation:fadeUp .8s forwards .7s}
+.hero-tagline{font-family:'Cormorant Garamond',serif; font-size:1.3rem; font-style:italic; color:var(--cyan); margin-bottom:3rem; opacity:0; animation:fadeUp .8s forwards .9s}
+.hero-cta{display:flex; flex-wrap:wrap; gap:1rem; align-items:center; opacity:0; animation:fadeUp .8s forwards 1.1s}
+
+.btn-primary{padding:.85rem 2rem; background:var(--blue); color:#fff; border:none; border-radius:3px; font-family:'DM Mono',monospace; font-size:.8rem; letter-spacing:.1em; text-transform:uppercase; text-decoration:none; transition:all .3s; cursor:pointer; display:inline-block}
+.btn-primary:hover{background:var(--blue-light); transform:translateY(-2px); box-shadow:0 8px 24px rgba(46,109,164,.4)}
+.btn-outline{padding:.85rem 2rem; background:transparent; color:rgba(255,255,255,.8); border:1px solid rgba(255,255,255,.25); border-radius:3px; font-family:'DM Mono',monospace; font-size:.8rem; letter-spacing:.1em; text-transform:uppercase; text-decoration:none; transition:all .3s}
+.btn-outline:hover{border-color:var(--cyan); color:var(--cyan); transform:translateY(-2px)}
+
+.social-links{display:flex; gap:.8rem}
+.social-link{width:44px; height:44px; border:1px solid rgba(255,255,255,.2); border-radius:3px; display:flex; align-items:center; justify-content:center; color:rgba(255,255,255,.65); text-decoration:none; transition:all .3s; font-size:1.1rem}
+.social-link:hover{border-color:var(--cyan); color:var(--cyan); transform:translateY(-2px)}
+
+.hero-scroll{position:absolute; bottom:2.5rem; left:50%; transform:translateX(-50%); display:flex; flex-direction:column; align-items:center; gap:.5rem; color:rgba(255,255,255,.3); font-family:'DM Mono',monospace; font-size:.65rem; letter-spacing:.15em; text-transform:uppercase; animation:scrollBounce 2s ease-in-out infinite}
+.hero-scroll::after{content:''; width:1px; height:40px; background:linear-gradient(to bottom,rgba(255,255,255,.3),transparent)}
+@keyframes scrollBounce{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(6px)}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+
+/* ══════════════════════════════════════════
+   SECTIONS COMMON
+══════════════════════════════════════════ */
+section{padding:6rem 3rem}
+.section-inner{max-width:1100px; margin:0 auto}
+.section-label{font-family:'DM Mono',monospace; font-size:.7rem; color:var(--blue); letter-spacing:.25em; text-transform:uppercase; margin-bottom:.5rem; display:flex; align-items:center; gap:1rem}
+.section-label::after{content:''; flex:1; max-width:60px; height:1px; background:var(--blue)}
+.section-title{font-family:'Cormorant Garamond',serif; font-size:clamp(2rem,4vw,3.2rem); font-weight:300; color:var(--navy-mid); line-height:1.15; margin-bottom:3rem}
+.section-title em{font-style:italic; color:var(--blue)}
+
+/* ── ABOUT ── */
+#about{background:var(--cream)}
+.about-grid{display:block; max-width:780px;}
+.about-text p{font-size:1.05rem; line-height:1.85; color:#2d4a5f; margin-bottom:1.5rem; text-align:justify; hyphens:auto;}
+.about-text p:first-child{font-family:'Cormorant Garamond',serif; font-size:1.3rem; font-style:italic; color:var(--navy-mid); line-height:1.6}
+.about-stats{display:grid; grid-template-columns:1fr 1fr; gap:1.5rem; margin-top:1rem}
+.stat-card{background:var(--white); border:1px solid var(--border); border-radius:6px; padding:1.5rem; position:relative; overflow:hidden; transition:all .3s}
+.stat-card::before{content:''; position:absolute; top:0; left:0; width:3px; height:100%; background:linear-gradient(to bottom,var(--blue),var(--cyan))}
+.stat-card:hover{transform:translateY(-3px); box-shadow:0 12px 32px rgba(27,58,92,.1)}
+.stat-number{font-family:'Cormorant Garamond',serif; font-size:2.8rem; font-weight:600; color:var(--navy-mid); line-height:1}
+.stat-number sup{font-size:1.2rem}
+.stat-label{font-family:'DM Mono',monospace; font-size:.7rem; color:var(--muted); text-transform:uppercase; letter-spacing:.1em; margin-top:.3rem}
+.about-info{display:flex; flex-direction:column; gap:1rem}
+.info-item{display:flex; align-items:flex-start; gap:1rem; padding:1rem 1.2rem; background:var(--white); border:1px solid var(--border); border-radius:6px; transition:all .25s}
+.info-item:hover{border-color:var(--blue)}
+.info-icon{font-size:1.2rem; flex-shrink:0; margin-top:1px}
+.info-label{font-family:'DM Mono',monospace; font-size:.65rem; color:var(--muted); text-transform:uppercase; letter-spacing:.1em}
+.info-value{font-size:.9rem; color:var(--navy-mid); font-weight:500; margin-top:.15rem}
+.info-value a{color:var(--blue); text-decoration:none}
+
+/* ── EXPERIENCE ── */
+#experience{background:linear-gradient(180deg,var(--cream-dark) 0%,var(--cream) 100%)}
+.timeline{position:relative; padding-left:2rem}
+.timeline::before{content:''; position:absolute; left:0; top:8px; bottom:8px; width:1px; background:linear-gradient(to bottom,var(--blue),var(--cyan),transparent)}
+.timeline-item{position:relative; padding-left:2.5rem; padding-bottom:3.5rem; opacity:0; transform:translateX(-20px); transition:all .6s cubic-bezier(.22,1,.36,1)}
+.timeline-item.visible{opacity:1; transform:translateX(0)}
+.timeline-item:last-child{padding-bottom:0}
+.timeline-dot{position:absolute; left:-2.42rem; top:6px; width:12px; height:12px; border-radius:50%; background:var(--blue); border:2px solid var(--cream-dark); box-shadow:0 0 0 3px rgba(46,109,164,.2)}
+.timeline-item:first-child .timeline-dot{background:var(--cyan); box-shadow:0 0 0 4px rgba(91,184,212,.25),0 0 12px var(--glow)}
+.timeline-meta{font-family:'DM Mono',monospace; font-size:.7rem; color:var(--muted); letter-spacing:.1em; text-transform:uppercase; margin-bottom:.5rem; display:flex; flex-wrap:wrap; gap:.5rem; align-items:center}
+.meta-badge{background:rgba(46,109,164,.1); color:var(--blue); padding:.15rem .6rem; border-radius:2px; font-size:.65rem}
+.meta-badge.current{background:rgba(91,184,212,.15); color:var(--cyan); animation:pulse 2s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.6}}
+.timeline-role{font-family:'Cormorant Garamond',serif; font-size:1.6rem; font-weight:400; color:var(--navy-mid); margin-bottom:.2rem}
+.timeline-org{font-size:.9rem; color:var(--blue); font-weight:500; margin-bottom:1rem}
+.timeline-supervisor{font-family:'DM Mono',monospace; font-size:.7rem; color:var(--muted); margin-bottom:1rem}
+.timeline-highlights{list-style:none; display:flex; flex-direction:column; gap:.6rem}
+.timeline-highlights li{font-size:.9rem; color:#2d4a5f; line-height:1.65; padding-left:1.2rem; position:relative}
+.timeline-highlights li::before{content:'→'; position:absolute; left:0; color:var(--blue); font-size:.75rem; top:3px}
+
+/* ── PROJECT ── */
+#project{background:var(--navy)}
+#project .section-label{color:var(--cyan)}
+#project .section-label::after{background:var(--cyan)}
+#project .section-title{color:var(--white)}
+#project .section-title em{color:var(--cyan)}
+
+.project-card{background:rgba(255,255,255,.04); border:1px solid rgba(91,184,212,.2); border-radius:8px; padding:3rem; position:relative; overflow:hidden; transition:all .4s}
+.project-card::before{content:''; position:absolute; top:0; left:0; right:0; height:2px; background:linear-gradient(90deg,var(--blue),var(--cyan))}
+.project-card:hover{border-color:rgba(91,184,212,.45); background:rgba(255,255,255,.06); transform:translateY(-4px); box-shadow:0 20px 60px rgba(0,0,0,.3)}
+
+.project-layout{display:grid; grid-template-columns:1fr 1fr; gap:3rem; align-items:start}
+
+/* PROJECT IMAGE SLOTS */
+.project-images{display:flex; flex-direction:column; gap:1rem}
+.project-img-slot{
+  border:2px dashed rgba(91,184,212,.3); border-radius:6px;
+  position:relative; overflow:hidden; cursor:pointer;
+  background:rgba(255,255,255,.02); transition:all .3s;
+  min-height:150px; display:flex; flex-direction:column; align-items:center; justify-content:center;
+}
+.project-img-slot:hover{border-color:var(--cyan); background:rgba(91,184,212,.05)}
+.project-img-slot input[type=file]{position:absolute; inset:0; opacity:0; cursor:pointer; z-index:2; width:100%; height:100%}
+.project-img-slot img{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; display:none}
+.project-img-slot .slot-ph{display:flex; flex-direction:column; align-items:center; gap:.4rem; color:rgba(255,255,255,.3); padding:1rem; text-align:center}
+.project-img-slot .slot-ph .sicon{font-size:1.8rem}
+.project-img-slot .slot-ph p{font-family:'DM Mono',monospace; font-size:.6rem; letter-spacing:.1em; text-transform:uppercase}
+.img-slot-label{font-family:'DM Mono',monospace; font-size:.6rem; color:rgba(255,255,255,.3); text-align:center; padding:.3rem; text-transform:uppercase; letter-spacing:.1em; position:absolute; bottom:0; left:0; right:0; background:rgba(0,0,0,.4)}
+
+.project-type{font-family:'DM Mono',monospace; font-size:.7rem; color:var(--cyan); letter-spacing:.15em; text-transform:uppercase; margin-bottom:1rem}
+.project-title{font-family:'Cormorant Garamond',serif; font-size:1.9rem; font-weight:300; color:var(--white); margin-bottom:1.2rem; line-height:1.2}
+.project-desc{font-size:.95rem; line-height:1.75; color:rgba(255,255,255,.6); margin-bottom:1.5rem}
+.pipeline-steps{display:flex; flex-wrap:wrap; align-items:center; gap:.4rem; margin-bottom:2rem}
+.pipeline-step{font-family:'DM Mono',monospace; font-size:.7rem; padding:.35rem .75rem; background:rgba(46,109,164,.25); border:1px solid rgba(46,109,164,.4); border-radius:2px; color:var(--blue-light)}
+.pipeline-arrow{color:rgba(255,255,255,.25); font-size:.8rem}
+.project-tags{display:flex; flex-wrap:wrap; gap:.5rem; margin-bottom:2rem}
+.tag{font-family:'DM Mono',monospace; font-size:.65rem; padding:.3rem .7rem; background:rgba(91,184,212,.1); border:1px solid rgba(91,184,212,.25); border-radius:2px; color:rgba(255,255,255,.55); letter-spacing:.05em}
+.project-link{display:inline-flex; align-items:center; gap:.6rem; font-family:'DM Mono',monospace; font-size:.75rem; letter-spacing:.1em; text-transform:uppercase; color:var(--cyan); text-decoration:none; padding-bottom:2px; border-bottom:1px solid rgba(91,184,212,.4); transition:all .25s}
+.project-link:hover{gap:1rem; border-color:var(--cyan)}
+
+/* ── SKILLS ── */
+#skills{background:var(--cream)}
+.skills-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:1.5rem}
+.skill-card{background:var(--white); border:1px solid var(--border); border-radius:8px; padding:2rem; transition:all .35s; position:relative; overflow:hidden}
+.skill-card::after{content:''; position:absolute; bottom:0; left:0; right:0; height:3px; background:linear-gradient(90deg,var(--blue),var(--cyan)); transform:scaleX(0); transform-origin:left; transition:transform .35s}
+.skill-card:hover{transform:translateY(-4px); box-shadow:0 16px 40px rgba(27,58,92,.12)}
+.skill-card:hover::after{transform:scaleX(1)}
+.skill-icon{font-size:2rem; margin-bottom:1rem; display:block}
+.skill-cat{font-family:'DM Mono',monospace; font-size:.7rem; color:var(--blue); text-transform:uppercase; letter-spacing:.15em; margin-bottom:.5rem}
+.skill-name{font-family:'Cormorant Garamond',serif; font-size:1.3rem; font-weight:600; color:var(--navy-mid); margin-bottom:1rem; line-height:1.2}
+.skill-tags{display:flex; flex-wrap:wrap; gap:.4rem}
+.skill-tag{font-size:.72rem; padding:.25rem .6rem; background:rgba(46,109,164,.07); border-radius:2px; color:var(--muted); border:1px solid rgba(46,109,164,.12)}
+
+/* ── EDUCATION ── */
+#education{background:var(--cream-dark)}
+.edu-card{background:var(--white); border:1px solid var(--border); border-radius:8px; padding:3rem; display:grid; grid-template-columns:1fr auto; gap:2rem; align-items:start; position:relative; overflow:hidden; transition:all .35s}
+.edu-card::before{content:''; position:absolute; left:0; top:0; bottom:0; width:4px; background:linear-gradient(to bottom,var(--blue),var(--cyan))}
+.edu-card:hover{transform:translateY(-3px); box-shadow:0 16px 40px rgba(27,58,92,.1)}
+.edu-degree{font-family:'Cormorant Garamond',serif; font-size:1.8rem; font-weight:400; color:var(--navy-mid); margin-bottom:.5rem}
+.edu-uni{font-size:1rem; font-weight:600; color:var(--blue); margin-bottom:.3rem}
+.edu-dept{font-size:.85rem; color:var(--muted); margin-bottom:1rem}
+.edu-meta{font-family:'DM Mono',monospace; font-size:.7rem; color:var(--muted); letter-spacing:.1em}
+.edu-cgpa{text-align:center; background:var(--navy); color:#fff; border-radius:6px; padding:1.5rem 2rem; flex-shrink:0}
+.cgpa-num{font-family:'Cormorant Garamond',serif; font-size:2.8rem; font-weight:600; line-height:1; color:var(--cyan)}
+.cgpa-label{font-family:'DM Mono',monospace; font-size:.65rem; color:rgba(255,255,255,.5); text-transform:uppercase; letter-spacing:.1em; margin-top:.3rem}
+
+/* ── CONTACT ── */
+#contact{background:var(--navy); text-align:center}
+#contact .section-label{justify-content:center; color:var(--cyan)}
+#contact .section-label::after{background:var(--cyan); max-width:40px}
+#contact .section-title{color:var(--white)}
+.contact-subtitle{font-family:'Cormorant Garamond',serif; font-size:1.2rem; font-style:italic; color:rgba(255,255,255,.55); margin-top:-1.5rem; margin-bottom:3rem}
+.contact-cards{display:flex; flex-wrap:wrap; justify-content:center; gap:1.5rem; margin-bottom:3rem}
+.contact-card{background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.1); border-radius:6px; padding:1.5rem 2rem; text-decoration:none; color:#fff; transition:all .3s; display:flex; flex-direction:column; align-items:center; gap:.5rem; min-width:180px}
+.contact-card:hover{border-color:var(--cyan); background:rgba(91,184,212,.08); transform:translateY(-4px)}
+.contact-card-icon{font-size:1.5rem}
+.contact-card-label{font-family:'DM Mono',monospace; font-size:.65rem; color:var(--cyan); text-transform:uppercase; letter-spacing:.1em}
+.contact-card-value{font-size:.85rem; color:rgba(255,255,255,.7)}
+
+/* ── FOOTER ── */
+footer{background:var(--navy); border-top:1px solid rgba(255,255,255,.06); padding:1.5rem 3rem; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem}
+.footer-text{font-family:'DM Mono',monospace; font-size:.7rem; color:rgba(255,255,255,.3)}
+.footer-back{font-family:'DM Mono',monospace; font-size:.7rem; color:rgba(255,255,255,.3); text-decoration:none; transition:color .25s}
+.footer-back:hover{color:var(--cyan)}
+
+/* reveal */
+.reveal{opacity:0; transform:translateY(30px); transition:all .7s cubic-bezier(.22,1,.36,1)}
+.reveal.visible{opacity:1; transform:translateY(0)}
+
+/* responsive */
+@media(max-width:900px){
+  nav{padding:1.2rem 1.5rem}
+  nav.scrolled{padding:.8rem 1.5rem}
+  .nav-links{display:none; flex-direction:column; position:absolute; top:100%; left:0; right:0; background:rgba(245,242,236,.98); padding:1.5rem; gap:1.5rem; border-bottom:1px solid var(--border)}
+  .nav-links.open{display:flex}
+  .nav-toggle{display:flex}
+  section{padding:4rem 1.5rem}
+  #hero{padding:6rem 1.5rem 3rem}
+  .hero-layout{grid-template-columns:1fr; gap:2rem}
+  .hero-photo-slot{width:200px; height:240px; margin:0 auto}
+  .about-grid{grid-template-columns:1fr; gap:3rem}
+  .edu-card{grid-template-columns:1fr}
+  .project-layout{grid-template-columns:1fr}
+  .about-stats{grid-template-columns:1fr 1fr}
+  footer{padding:1.5rem}
+  #editorPanel{width:100vw}
+}
+@media(max-width:600px){
+  .skills-grid{grid-template-columns:1fr}
+  .about-stats{grid-template-columns:1fr}
+  .project-card{padding:2rem 1.5rem}
+}
+</style>
+</head>
+<body>
+
+<!-- ══ TOAST ══ -->
+<div id="toast">Changes saved!</div>
+
+<!-- ══════════════════════════════════════════
+     EDITOR PANEL
+══════════════════════════════════════════ -->
+<div id="editorPanel">
+  <div class="ep-header">
+    <h3>Portfolio Editor</h3>
+    <p>Click any tab to edit that section</p>
+  </div>
+  <div class="ep-body">
+
+    <!-- TABS -->
+    <div class="ep-tabs">
+      <button class="ep-tab active" data-tab="hero">Hero</button>
+      <button class="ep-tab" data-tab="about">About</button>
+      <button class="ep-tab" data-tab="experience">Experience</button>
+      <button class="ep-tab" data-tab="project">Project</button>
+      <button class="ep-tab" data-tab="skills">Skills</button>
+      <button class="ep-tab" data-tab="education">Education</button>
+      <button class="ep-tab" data-tab="contact">Contact</button>
+      <button class="ep-tab" data-tab="images">📷 Images</button>
+    </div>
+
+    <!-- ── HERO TAB ── -->
+    <div class="ep-section active" id="tab-hero">
+      <div class="ep-group">
+        <label class="ep-label">Full Name</label>
+        <input class="ep-input" id="e-heroName" value="SARAVANAN K">
+      </div>
+      <div class="ep-group">
+        <label class="ep-label">Title</label>
+        <input class="ep-input" id="e-heroTitle" value="M.Tech Biotechnology — Cell & Molecular Biology Researcher>
+      </div>
+      <div class="ep-group">
+        <label class="ep-label">Tagline</label>
+        <input class="ep-input" id="e-heroTagline" value="Bridging Wet Lab Biology with Computational Research">
+      </div>
+      <div class="ep-group">
+        <label class="ep-label">Eyebrow Text</label>
+        <input class="ep-input" id="e-heroEyebrow" value="// // Molecular Biology · Assay Development · Translational Research>
+      </div>
+      <div class="ep-group">
+        <label class="ep-label">Button 1 Label</label>
+        <input class="ep-input" id="e-btn1Label" value="View Projects">
+      </div>
+      <div class="ep-group">
+        <label class="ep-label">Button 2 Label</label>
+        <input class="ep-input" id="e-btn2Label" value="Contact Me">
+      </div>
+      <div class="ep-group">
+        <label class="ep-label">LinkedIn URL</label>
+        <input class="ep-input" id="e-linkedin" value="https://www.linkedin.com/in/saravanank25">
+      </div>
+      <div class="ep-group">
+        <label class="ep-label">GitHub URL</label>
+        <input class="ep-input" id="e-github" value="https://github.com/saravanank2503">
+      </div>
+    </div>
+
+    <!-- ── ABOUT TAB ── -->
+    <div class="ep-section" id="tab-about">
+      <div class="ep-group">
+        <label class="ep-label">Opening Paragraph (italic)</label>
+        <textarea class="ep-textarea" id="e-aboutPara1">M.Tech Biotechnology graduate bridging the gap between wet lab precision and computational innovation — with hands-on expertise in mammalian cell culture, RT-PCR/qPCR, and end-to-end RNA-Seq pipeline development.</textarea>
+      </div>
+      <div class="ep-group">
+        <label class="ep-label">Paragraph 2</label>
+        <textarea class="ep-textarea" id="e-aboutPara2">Proficient in high-frequency RT-PCR/qPCR, mitochondrial &amp; telomere quantification assays, RNA/DNA isolation, primer design, multi-biomarker ELISA development, heavy metal biomarker profiling, and GLP-compliant documentation.</textarea>
+      </div>
+      <div class="ep-group">
+        <label class="ep-label">Paragraph 3</label>
+        <textarea class="ep-textarea" id="e-aboutPara3">Built an end-to-end automated RNA-Seq bioinformatics pipeline using Nextflow and Docker. Committed to reproducible, data-driven outcomes in biotech and pharma R&amp;D.</textarea>
+      </div>
+      <div class="ep-group">
+        <label class="ep-label">Location</label>
+        <input class="ep-input" id="e-location" value="Tiruchirappalli, Tamil Nadu, India">
+      </div>
+      <div class="ep-group">
+        <label class="ep-label">Email</label>
+        <input class="ep-input" id="e-email" value="saravananmtech25@gmail.com">
+      </div>
+      <div class="ep-group">
+        <label class="ep-label">Phone</label>
+        <input class="ep-input" id="e-phone" value="+91 8072104819">
+      </div>
+      <div class="ep-group">
+        <label class="ep-label">Stat 1: Number / Label</label>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:.5rem">
+          <input class="ep-input" id="e-stat1n" value="100+">
+          <input class="ep-input" id="e-stat1l" value="RT-PCR Runs">
+        </div>
+      </div>
+      <div class="ep-group">
+        <label class="ep-label">Stat 2: Number / Label</label>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:.5rem">
+          <input class="ep-input" id="e-stat2n" value="&lt;2%">
+          <input class="ep-input" id="e-stat2l" value="Ct CV Maintained">
+        </div>
+      </div>
+      <div class="ep-group">
+        <label class="ep-label">Stat 3: Number / Label</label>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:.5rem">
+          <input class="ep-input" id="e-stat3n" value="9">
+          <input class="ep-input" id="e-stat3l" value="SOPs Authored">
+        </div>
+      </div>
+      <div class="ep-group">
+        <label class="ep-label">Stat 4: Number / Label</label>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:.5rem">
+          <input class="ep-input" id="e-stat4n" value="50+">
+          <input class="ep-input" id="e-stat4l" value="Compounds Screened">
+        </div>
+      </div>
+    </div>
+
+    <!-- ── EXPERIENCE TAB ── -->
+    <div class="ep-section" id="tab-experience">
+      <div id="exp-items-editor"></div>
+      <button class="ep-add-btn" id="addExpBtn">+ Add Experience</button>
+    </div>
+
+    <!-- ── PROJECT TAB ── -->
+    <div class="ep-section" id="tab-project">
+      <div class="ep-group">
+        <label class="ep-label">Project Title</label>
+        <input class="ep-input" id="e-projTitle" value="Automated Reproducible RNA-Seq Analysis Pipeline">
+      </div>
+      <div class="ep-group">
+        <label class="ep-label">Project Type / Year</label>
+        <input class="ep-input" id="e-projType" value="Personal Project · 2025">
+      </div>
+      <div class="ep-group">
+        <label class="ep-label">Description</label>
+        <textarea class="ep-textarea" style="min-height:120px" id="e-projDesc">Built a fully containerized and reproducible end-to-end RNA-Seq analysis pipeline using Nextflow and Docker, enabling scalable, portable genomic analysis workflows. Validated on a CAR-T immunotherapy dataset spanning 4 conditions × 3 replicates with comprehensive quality control, alignment, quantification, and differential expression stages.</textarea>
+      </div>
+      <div class="ep-group">
+        <label class="ep-label">Pipeline Steps (comma-separated)</label>
+        <input class="ep-input" id="e-pipeline" value="FastQC,Trim Galore,STAR,featureCounts,DESeq2">
+      </div>
+      <div class="ep-group">
+        <label class="ep-label">Tags (comma-separated)</label>
+        <textarea class="ep-textarea" id="e-projTags">Nextflow,Docker,DESeq2,STAR Aligner,RNA-Seq,Volcano Plots,PCA,Heatmaps,CAR-T Dataset</textarea>
+      </div>
+      <div class="ep-group">
+        <label class="ep-label">GitHub Link</label>
+        <input class="ep-input" id="e-projLink" value="https://github.com/saravanank2503/Automated-Reproducible-RNA-SEQ-analysis-Pipeline-by-using-Nextflow-and-Docker">
+      </div>
+    </div>
+
+    <!-- ── SKILLS TAB ── -->
+    <div class="ep-section" id="tab-skills">
+      <div id="skills-items-editor"></div>
+      <button class="ep-add-btn" id="addSkillBtn">+ Add Skill Card</button>
+    </div>
+
+    <!-- ── EDUCATION TAB ── -->
+    <div class="ep-section" id="tab-education">
+      <div class="ep-group">
+        <label class="ep-label">Degree</label>
+        <input class="ep-input" id="e-degree" value="M.Tech in Biotechnology">
+      </div>
+      <div class="ep-group">
+        <label class="ep-label">Programme Type</label>
+        <input class="ep-input" id="e-programme" value="Integrated 5-Year Programme">
+      </div>
+      <div class="ep-group">
+        <label class="ep-label">University</label>
+        <input class="ep-input" id="e-uni" value="Bharathidasan University, Tiruchirappalli">
+      </div>
+      <div class="ep-group">
+        <label class="ep-label">Department</label>
+        <input class="ep-input" id="e-dept" value="Department of Biotechnology · School of Biotechnology &amp; Genetic Engineering">
+      </div>
+      <div class="ep-group">
+        <label class="ep-label">Year Range</label>
+        <input class="ep-input" id="e-yearRange" value="2019 – 2025">
+      </div>
+      <div class="ep-group">
+        <label class="ep-label">CGPA</label>
+        <input class="ep-input" id="e-cgpa" value="7.6">
+      </div>
+    </div>
+
+    <!-- ── CONTACT TAB ── -->
+    <div class="ep-section" id="tab-contact">
+      <div class="ep-group">
+        <label class="ep-label">Section Subtitle</label>
+        <input class="ep-input" id="e-contactSub" value="Open to research collaborations, biotech &amp; pharma opportunities">
+      </div>
+      <div class="ep-group">
+        <label class="ep-label">Email</label>
+        <input class="ep-input" id="e-contactEmail" value="saravananmtech25@gmail.com">
+      </div>
+      <div class="ep-group">
+        <label class="ep-label">Phone</label>
+        <input class="ep-input" id="e-contactPhone" value="+91 8072104819">
+      </div>
+      <div class="ep-group">
+        <label class="ep-label">LinkedIn URL</label>
+        <input class="ep-input" id="e-contactLI" value="https://www.linkedin.com/in/saravanank25">
+      </div>
+      <div class="ep-group">
+        <label class="ep-label">GitHub URL</label>
+        <input class="ep-input" id="e-contactGH" value="https://github.com/saravanank2503">
+      </div>
+      <div class="ep-group">
+        <label class="ep-label">Footer Text</label>
+        <input class="ep-input" id="e-footer" value="© 2025 Saravanan K · All rights reserved">
+      </div>
+    </div>
+
+    <!-- ── IMAGES TAB ── -->
+    <div class="ep-section" id="tab-images">
+      <p style="font-size:.75rem;color:rgba(255,255,255,.4);margin-bottom:1.2rem;line-height:1.6">Upload images directly. They appear instantly on the portfolio. Profile photo goes in the Hero section. Project images appear in the Project section.</p>
+
+      <div class="ep-group">
+        <label class="ep-label">Profile Photo (Hero Section)</label>
+        <div class="img-upload-zone" id="profileUploadZone">
+          <input type="file" accept="image/*" id="profileUploadInput">
+          <img class="zone-preview" id="profileZonePreview">
+          <div class="zone-icon">👤</div>
+          <p>Click or drop your photo here<br>Recommended: 4:5 portrait</p>
+        </div>
+      </div>
+
+      <div class="ep-group">
+        <label class="ep-label">Project Image 1 — Cell Culture / Lab</label>
+        <div class="img-upload-zone" id="proj1UploadZone">
+          <input type="file" accept="image/*" id="proj1UploadInput">
+          <img class="zone-preview" id="proj1ZonePreview">
+          <div class="zone-icon">🔬</div>
+          <p>Cell culture / microscopy image</p>
+        </div>
+      </div>
+
+      <div class="ep-group">
+        <label class="ep-label">Project Image 2 — RNA-Seq / Bioinformatics</label>
+        <div class="img-upload-zone" id="proj2UploadZone">
+          <input type="file" accept="image/*" id="proj2UploadInput">
+          <img class="zone-preview" id="proj2ZonePreview">
+          <div class="zone-icon">🧬</div>
+          <p>Volcano plot / heatmap / pipeline screenshot</p>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /ep-body -->
+
+  <div class="ep-actions">
+    <button class="ep-save-btn" id="saveBtn">Apply Changes</button>
+    <button class="ep-export-btn" id="exportBtn">Export HTML</button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     PORTFOLIO
+══════════════════════════════════════════ -->
+
+<!-- NAV -->
+<nav id="navbar">
+  <div class="nav-logo" id="d-navLogo"></div>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#about">About</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#project">Project</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="nav-toggle" id="navToggle"><span></span><span></span><span></span></div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="hero-layout">
+    <div class="hero-content">
+      <div class="hero-eyebrow" id="d-heroEyebrow">// Molecular Biology · Assay Development · Translational Research</div>
+      <h1 class="hero-name" id="d-heroName">SARAVANAN <span>K</span></h1>
+      <p class="hero-title" id="d-heroTitle">M.Tech Biotechnology — Cell &amp; Molecular Biology Researcher</p>
+      <p class="hero-tagline" id="d-heroTagline">Rigour at the bench. Conviction in the results.</p>
+      <div class="hero-cta">
+        <a href="#project" class="btn-primary" id="d-btn1">View Projects</a>
+        <a href="#contact" class="btn-outline" id="d-btn2">Contact Me</a>
+        <div class="social-links">
+          <a href="https://www.linkedin.com/in/saravanank25" target="_blank" class="social-link" id="d-liLink">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          </a>
+          <a href="https://github.com/saravanank2503" target="_blank" class="social-link" id="d-ghLink">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+    <!-- PROFILE PHOTO SLOT -->
+    <div class="hero-photo-slot" id="profileSlot" title="Click to upload your profile photo">
+      <input type="file" accept="image/*" id="profileSlotInput">
+      <img id="profileImg" src="images/profile_picture.jpg" alt="Saravanan K" style="display:block;">
+      <div class="slot-placeholder" id="profilePlaceholder" style="display:none;">
+        <div class="slot-icon">📸</div>
+        <p>Upload Profile Photo</p>
+        <p style="font-size:.55rem;margin-top:.2rem;opacity:.6">Click here · 4:5 portrait recommended</p>
+      </div>
+    </div>
+  </div>
+  <div class="hero-scroll">scroll</div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-inner">
+    <div class="section-label">01 // About</div>
+    <h2 class="section-title">From <em>Assay</em> to Answer</h2>
+    <div class="about-grid">
+      <div class="about-text reveal">
+        <p id="d-aboutPara1" data-editable="about-p1">A 2025 M.Tech Biotechnology graduate whose research formation spans both industry and academic environments — shaped by sustained engagement with molecular assay development, validation, and the methodological discipline that reproducible science demands.</p>
+        <p id="d-aboutPara2">In an industry setting at Auxochromofours Solution Pvt Ltd, I contributed to the development and validation of RT-PCR and qPCR workflows, the construction of multi-biomarker ELISA panels, and the execution of mitochondrial integrity and telomere quantification assays — each governed by GLP-compliant documentation frameworks and codified through SOPs authored to preserve methodological consistency. At THSTI, my M.Tech thesis work centred on establishing a dual-cell in vitro lipotoxicity model in HepG2 and H9c2 cells, encompassing MTT cytotoxicity profiling, Nile Red fluorescence-based lipid quantification, RT-qPCR gene expression analysis on NAFLD-associated targets, and compound screening across a focused bioactivity panel.</p>
+        <p id="d-aboutPara3">Alongside bench expertise, I carry a working command of computational biology — evidenced by an end-to-end RNA-Seq analysis pipeline architected in Nextflow and Docker — extending my capacity from experimental design through to quantitative data interpretation without disciplinary handoff.</p>
+        <div class="about-stats">
+          <div class="stat-card"><div class="stat-number" id="d-stat1n">100<sup>+</sup></div><div class="stat-label" id="d-stat1l">RT-PCR Runs</div></div>
+          <div class="stat-card"><div class="stat-number" id="d-stat2n">&lt;2%</div><div class="stat-label" id="d-stat2l">Ct CV Maintained</div></div>
+          <div class="stat-card"><div class="stat-number" id="d-stat3n">8</div><div class="stat-label" id="d-stat3l">SOPs Authored</div></div>
+          <div class="stat-card"><div class="stat-number" id="d-stat4n">50<sup>+</sup></div><div class="stat-label" id="d-stat4l">Compounds Screened</div></div>
+        </div>
+      </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-inner">
+    <div class="section-label">02 // Experience</div>
+    <h2 class="section-title">Research &amp; <em>Career</em> Journey</h2>
+    
+    <div class="timeline" id="d-timeline">
+
+      <!-- Research Associate -->
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-meta"><span>Sep 2025 – Present</span><span class="meta-badge current">● Current</span></div>
+        <div class="timeline-role">Research Associate</div>
+        <div class="timeline-org">Auxochromofours Solution Pvt Ltd, Bangalore</div>
+        <ul class="timeline-highlights">
+          <li>Led the development and full validation of critical molecular assays, including multi-biomarker ELISA panels, mitochondrial DNA copy number (qPCR), and telomere length analysis (T/S ratio method), establishing robust inter-assay reproducibility controls and GLP-compliant documentation.</li>
+          <li>Played a key role in biomarker profiling projects by defining analytical requirements for heavy metals and trace elements, outsourcing testing, and providing expert interpretation of laboratory reports to support client decision-making.</li>
+          <li>Performed nucleic acid isolation (RNA and DNA) from diverse biological matrices using both TRIzol and column-based methods; conducted quality assessment using NanoDrop (A260/280 ratio) and gel electrophoresis.</li>
+          <li>Executed 100+ high-frequency RT-PCR/qPCR runs while maintaining excellent reproducibility (Ct CV <2%); designed and optimized custom primers using Primer3 & NCBI Primer-BLAST, significantly reducing non-specific amplification.</li>
+          <li>Authored 8 SOPs for key molecular workflows (RT-PCR, ELISA, RNA extraction, telomere assay) and maintained full reagent traceability and calibration logs as per GLP standards.</li>
+          <li>Prepared technical reports with statistical analysis and scientific interpretation for internal and client review.</li>
+        </ul>
+      </div>
+
+      <!-- Research Trainee -->
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+
+        <!-- Project Title First -->
+        <h4 style="margin: 10px 0 15px 0; color: #1B3A5C; font-size: 1.15rem; font-weight: 600;">
+          In Vitro Assessment of Free Fatty Acid-Induced Cytotoxicity and Lipid Accumulation in HepG2 and H9c2 Cells
+        </h4>
+
+        <div class="timeline-meta"><span>Dec 2024 – Apr 2025</div>
+        <div class="timeline-role">Research Trainee</div>
+        <div class="timeline-org">THSTI, Faridabad</div>
+        <div class="timeline-supervisor">Supervised by Dr. Ruchi Tandon · In vitro NAFLD-associated cardiovascular disease model</div>
+        <ul class="timeline-highlights">
+          <li>Established a dual-cell in vitro lipotoxicity model (HepG2 + H9c2) using free fatty acid (OA/PA, 2:1) induction to study NAFLD-associated cardiovascular disease mechanisms.</li>
+          <li>Performed MTT cytotoxicity assays across 4 FFA concentrations (250–1000 µM); identified 500 µM as the critical steatotic threshold in hepatic cells.</li>
+          <li>Quantified intracellular lipid accumulation using Nile Red fluorescence and confirmed nuclear integrity via DAPI staining across both cell lines.</li>
+          <li>Conducted RT-qPCR gene expression analysis using SYBR Green; detected significant upregulation of CD36 and pro-inflammatory markers (TNF-α, IL-1β) in FFA-treated cells.</li>
+          <li>Performed RNA isolation via TRIzol method and cDNA synthesis; validated RNA purity using NanoDrop (A260/280 >1.8).</li>
+          <li>Maintained HepG2 and H9c2 cell lines under BSL-2 aseptic conditions; performed routine passaging, cryopreservation, and cell revival.</li>
+          <li>Contributed to manuscript preparation and target validation supporting the NAFLD-CVD research pipeline.</li>
+        </ul>
+       <!-- THSTI Project Images -->
+        <div style="margin-top: 30px; display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+
+          <div style="width: 100%; text-align: center;">
+            <div style="width: 100%; height: 340px; background: #ffffff; border-radius: 10px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.15); display: flex; align-items: center; justify-content: center; padding: 15px; box-sizing: border-box;">
+              <img src="https://www.image2url.com/r2/default/images/1778778486800-e6d08f77-04d0-421e-9c3f-00680f7428d5.jpg" 
+                   alt="Nile Red Staining" 
+                   style="width: 100%; height: 100%; object-fit: contain; display: block; padding: 10px; box-sizing: border-box;">
+            </div>
+            <h3 style="margin-top: 15px; font-size: 30px; color: #0d2b52; font-weight: 600; line-height: 1.3; text-align: center;">Nile Red Staining</h3>
+          </div>
+
+          <div style="width: 100%; text-align: center;">
+            <div style="width: 100%; height: 340px; background: #ffffff; border-radius: 10px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.15); display: flex; align-items: center; justify-content: center; padding: 15px; box-sizing: border-box;">
+              <img src="https://www.image2url.com/r2/default/images/1778778440347-b75b344e-c44d-4379-bee1-fc29fc613517.jpg" 
+                   alt="DAPI Staining" 
+                   style="width: 100%; height: 100%; object-fit: contain; display: block; padding: 10px; box-sizing: border-box;">
+            </div>
+            <h3 style="margin-top: 15px; font-size: 30px; color: #0d2b52; font-weight: 600; line-height: 1.3; text-align: center;">DAPI Staining</h3>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Research Intern -->
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+
+        <!-- Project Title -->
+        <h4 style="margin: 10px 0 15px 0; color: #1B3A5C; font-size: 1.15rem; font-weight: 600; line-height: 1.3;">
+          In Silico Antiviral Activity Study of Marine Alkaloid Topsentin from Spongosorites genitrix against HIV-1 Targets
+        </h4>
+
+        <div class="timeline-meta"><span>May 2024 – Jun 2024</div>
+        <div class="timeline-role">Research Intern</div>
+        <div class="timeline-org">NCSCM, Anna University, Chennai</div>
+        <div class="timeline-supervisor">Supervised by Dr. V. Deepak Samuel · Computational antiviral drug discovery</div>
+        <ul class="timeline-highlights">
+          <li>Retrieved marine alkaloid Topsentin (C₂₀H₁₄N₄O₂) from PubChem; confirmed drug-likeness via SwissADME — satisfying Lipinski's Rule of Five with high GI absorption, CYP1A2/2C19/2D6 enzyme interaction profile.</li>
+          <li>Selected and prepared 6 HIV-1 target proteins (capsid 2XDE, fusion inhibitor 3VTQ, gp120 complex 4J6R, reverse transcriptase 4G1Q, pantothenate synthetase 4MUJ, protease 5YOK) from RCSB-PDB; performed active site prediction using PyMOL.</li>
+          <li>Executed multi-target molecular docking using AutoDock Vina with customized grid box parameters per receptor; best binding affinity recorded at −10.3 kcal/mol against HIV-1 Protease (5YOK).</li>
+          <li>Characterized protein-ligand hydrogen bond and hydrophobic interaction networks using LigPlot; 4MUJ showed strongest multi-residue H-bond network (ALA-3, GLN-6, VAL-46, ARG-45, LEU-49) with bond distances 2.01–2.51 Å.</li>
+          <li>Evaluated ADMET safety profile via admetSAR; Topsentin confirmed non-carcinogenic (p=0.673), non-mutagenic (p=0.797), high HIA (1.000) and BBB permeability (0.888) — favorable therapeutic development profile.</li>
+          <li>Demonstrated Topsentin's potential as a broad-spectrum anti-HIV candidate through consistent binding across all 6 HIV-1 targets spanning entry, replication, and maturation pathways.</li>
+        </ul>
+             <!-- 5YOK Project Image + Table Section -->
+<div style="
+    margin: 35px 0 60px 0;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+    align-items: stretch;
+">
+
+  <!-- IMAGE SECTION -->
+  <div style="
+      width: 100%;
+      text-align: center;
+  ">
+
+    <!-- FRAME -->
+    <div style="
+        width: 100%;
+        height: 340px;
+        background: #ffffff;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 15px;
+        box-sizing: border-box;
+    ">
+      <img src="images/5YOK.jpg"
+           alt="5YOK Molecular Docking Analysis"
+           style="
+              width: 100%;
+              height: 100%;
+              object-fit: contain;
+              display: block;
+              padding: 10px;
+              box-sizing: border-box;
+           ">
+    </div>
+
+    <!-- TITLE CAPTION — stays INSIDE the left column, below the frame -->
+    <h3 style="
+        margin-top: 15px;
+        font-size: 30px;
+        color: #0d2b52;
+        font-weight: 600;
+        line-height: 1.3;
+        text-align: center;
+    ">
+      5YOK Molecular Docking Analysis
+    </h3>
+
+  </div>
+
+  <!-- TABLE SECTION -->
+  <div style="
+      width: 100%;
+      text-align: center;
+  ">
+
+    <!-- FRAME -->
+    <div style="
+        width: 100%;
+        height: 340px;
+        background: #ffffff;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 22px;
+        box-sizing: border-box;
+    ">
+
+      <!-- TABLE TITLE -->
+      <h3 style="
+          margin-bottom: 18px;
+          color: #1B3A5C;
+          text-align: center;
+          font-size: 30px;
+          font-weight: 600;
+          line-height: 1.3;
+      ">
+        ADMET Profile of Topsentin
+      </h3>
+
+      <!-- TABLE -->
+      <table style="
+          width: 100%;
+          border-collapse: collapse;
+          text-align: center;
+          font-size: 13px;
+          table-layout: fixed;
+      ">
+        <thead>
+          <tr style="background-color: #1B3A5C; color: white;">
+            <th style="padding: 10px 4px; border: 1px solid #d6d6d6;">Molecules</th>
+            <th style="padding: 10px 4px; border: 1px solid #d6d6d6;">HIA</th>
+            <th style="padding: 10px 4px; border: 1px solid #d6d6d6;">BBB</th>
+            <th style="padding: 10px 4px; border: 1px solid #d6d6d6;">Caco-2</th>
+            <th style="padding: 10px 4px; border: 1px solid #d6d6d6;">Carcinogenicity</th>
+            <th style="padding: 10px 4px; border: 1px solid #d6d6d6;">Ames Mutagenesis</th>
+          </tr>
+          <tr style="background-color: #e9eef5; color: #1B3A5C; font-size: 12px;">
+            <th style="padding: 6px 4px; border: 1px solid #d6d6d6;"></th>
+            <th style="padding: 6px 4px; border: 1px solid #d6d6d6;">V&nbsp;&nbsp;P</th>
+            <th style="padding: 6px 4px; border: 1px solid #d6d6d6;">V&nbsp;&nbsp;P</th>
+            <th style="padding: 6px 4px; border: 1px solid #d6d6d6;">V&nbsp;&nbsp;P</th>
+            <th style="padding: 6px 4px; border: 1px solid #d6d6d6;">V&nbsp;&nbsp;P</th>
+            <th style="padding: 6px 4px; border: 1px solid #d6d6d6;">V&nbsp;&nbsp;P</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="padding: 10px 4px; border: 1px solid #d6d6d6; font-weight: 600;">Topsentin</td>
+            <td style="padding: 10px 4px; border: 1px solid #d6d6d6;">+ <span style="color:#666;">1.000</span></td>
+            <td style="padding: 10px 4px; border: 1px solid #d6d6d6;">+ <span style="color:#666;">0.888</span></td>
+            <td style="padding: 10px 4px; border: 1px solid #d6d6d6;">− <span style="color:#666;">0.742</span></td>
+            <td style="padding: 10px 4px; border: 1px solid #d6d6d6;">− <span style="color:#666;">0.673</span></td>
+            <td style="padding: 10px 4px; border: 1px solid #d6d6d6;">− <span style="color:#666;">0.797</span></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- FOOTNOTE -->
+      <p style="margin-top: 15px; font-size: 13px; color: #555; text-align: center;">
+        V – Value | P – Probability
+      </p>
+
+    </div>
+
+  </div>
+
+</div>
+      </div><!-- END Research Intern timeline-item -->
+
+      <!-- Student Researcher -->
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+
+        <!-- New Project Title -->
+        <h4 style="margin: 10px 0 15px 0; color: #1B3A5C; font-size: 1.15rem; font-weight: 600;">
+          Molecular Docking Analysis of Candidate Compounds obtained from Phenol Explorer Database against Therapeutic targets of Diabetes
+        </h4>
+
+        <div class="timeline-meta"><span>Jan 2023 – May 2023</div>
+        <div class="timeline-role">Student Researcher</div>
+        <div class="timeline-org">Manonmaniam Sundaranar University, Tirunelveli</div>
+        <div class="timeline-supervisor">Supervised by Dr. S. Umamaheshwari · Virtual screening for antidiabetic compounds</div>
+        <ul class="timeline-highlights">
+          <li>Screened 372 polyphenolic compounds from the Phenol Explorer Database for drug-likeness using SwissADME; shortlisted 68 candidates satisfying Lipinski's Rule of Five criteria.</li>
+          <li>Retrieved and prepared 9 diabetes-associated receptor protein structures from PDB; performed multi-target molecular docking using AutoDock Vina.</li>
+          <li>Identified Episesaminol as the lead compound with highest binding affinity of −15.3 kcal/mol against receptor 3A4A, with significant hydrogen bond interactions across all 9 targets.</li>
+          <li>Visualized and analysed protein-ligand interaction networks using PyMOL; characterized key binding residues (THR-290, LEU-297, SER-298) at active sites.</li>
+          <li>Evaluated ADMET properties of lead compound using admetSAR; confirmed high human intestinal absorption (0.987), BBB permeability, non-carcinogenic and non-mutagenic profile.</li>
+          <li>Demonstrated multi-target antidiabetic potential of Episesaminol — docked against insulin receptor, PPARγ, DPP-4, and 6 additional validated diabetes targets.</li>
+        </ul>
+        <!-- ===== 3 IMAGE PROJECT SECTION ===== -->
+<div style="
+    margin-top: 35px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+    justify-items: center;
+">
+
+  <!-- IMAGE 1 -->
+  <div style="
+      width: 100%;
+      max-width: 620px;
+      text-align: center;
+  ">
+
+    <!-- Frame -->
+    <div style="
+        width: 100%;
+        height: 340px;
+        background: #ffffff;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    ">
+
+      <img src="images/drug_likeness_screening_funnel.jpg"
+           alt="Drug Likeness Screening Funnel"
+           style="
+              width: 100%;
+              height: 100%;
+              object-fit: contain;
+              display: block;
+              padding: 10px;
+              box-sizing: border-box;
+           ">
+
+    </div>
+
+    <!-- Title -->
+    <h3 style="
+        margin-top: 15px;
+        font-size: 30px;
+        color: #0d2b52;
+        font-weight: 600;
+        line-height: 1.3;
+    ">
+      Drug Likeness Screening Funnel
+    </h3>
+
+  </div>
+
+  <!-- IMAGE 2 -->
+  <div style="
+      width: 100%;
+      max-width: 620px;
+      text-align: center;
+  ">
+
+    <!-- Frame -->
+    <div style="
+        width: 100%;
+        height: 340px;
+        background: #ffffff;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    ">
+
+      <img src="images/3A4A.jpg"
+           alt="3A4A Molecular Docking Analysis"
+           style="
+              width: 100%;
+              height: 100%;
+              object-fit: contain;
+              display: block;
+              padding: 10px;
+              box-sizing: border-box;
+           ">
+
+    </div>
+
+    <!-- Title -->
+    <h3 style="
+        margin-top: 15px;
+        font-size: 30px;
+        color: #0d2b52;
+        font-weight: 600;
+        line-height: 1.3;
+    ">
+      3A4A Molecular Docking Analysis
+    </h3>
+
+  </div>
+
+</div>
+
+<!-- ===== CENTER TABLE SECTION ===== -->
+<div style="
+    margin-top: 40px;
+    display: flex;
+    justify-content: center;
+">
+
+  <div style="
+      width: 100%;
+      max-width: 620px;
+      text-align: center;
+  ">
+
+    <!-- Frame -->
+    <div style="
+        width: 100%;
+        height: 340px;
+        background: #ffffff;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 22px;
+        box-sizing: border-box;
+    ">
+
+      <!-- Table Title -->
+      <h3 style="
+          margin-bottom: 18px;
+          color: #1B3A5C;
+          text-align: center;
+          font-size: 28px;
+          font-weight: 600;
+          line-height: 1.3;
+      ">
+        ADMET Profile of Episesaminol
+      </h3>
+
+      <!-- TABLE -->
+      <table style="
+          width: 100%;
+          border-collapse: collapse;
+          text-align: center;
+          font-size: 13px;
+          table-layout: fixed;
+      ">
+
+        <thead>
+
+          <tr style="
+              background-color: #1B3A5C;
+              color: white;
+          ">
+
+            <th style="padding: 10px 4px; border: 1px solid #d6d6d6;">Molecules</th>
+            <th style="padding: 10px 4px; border: 1px solid #d6d6d6;">HIA</th>
+            <th style="padding: 10px 4px; border: 1px solid #d6d6d6;">BBB</th>
+            <th style="padding: 10px 4px; border: 1px solid #d6d6d6;">Caco-2</th>
+            <th style="padding: 10px 4px; border: 1px solid #d6d6d6;">Carcinogenicity</th>
+            <th style="padding: 10px 4px; border: 1px solid #d6d6d6;">Ames Mutagenesis</th>
+
+          </tr>
+
+          <tr style="
+              background-color: #e9eef5;
+              color: #1B3A5C;
+              font-size: 12px;
+          ">
+
+            <th style="padding: 6px 4px; border: 1px solid #d6d6d6;"></th>
+            <th style="padding: 6px 4px; border: 1px solid #d6d6d6;">V&nbsp;&nbsp;P</th>
+            <th style="padding: 6px 4px; border: 1px solid #d6d6d6;">V&nbsp;&nbsp;P</th>
+            <th style="padding: 6px 4px; border: 1px solid #d6d6d6;">V&nbsp;&nbsp;P</th>
+            <th style="padding: 6px 4px; border: 1px solid #d6d6d6;">V&nbsp;&nbsp;P</th>
+            <th style="padding: 6px 4px; border: 1px solid #d6d6d6;">V&nbsp;&nbsp;P</th>
+
+          </tr>
+
+        </thead>
+
+        <tbody>
+
+          <tr>
+
+            <td style="
+                padding: 10px 4px;
+                border: 1px solid #d6d6d6;
+                font-weight: 600;
+            ">
+              Episesaminol
+            </td>
+
+            <td style="padding: 10px 4px; border: 1px solid #d6d6d6;">
+              + <span style="color:#666;">0.987</span>
+            </td>
+
+            <td style="padding: 10px 4px; border: 1px solid #d6d6d6;">
+              + <span style="color:#666;">0.550</span>
+            </td>
+
+            <td style="padding: 10px 4px; border: 1px solid #d6d6d6;">
+              − <span style="color:#666;">0.546</span>
+            </td>
+
+            <td style="padding: 10px 4px; border: 1px solid #d6d6d6;">
+              − <span style="color:#666;">0.910</span>
+            </td>
+
+            <td style="padding: 10px 4px; border: 1px solid #d6d6d6;">
+              − <span style="color:#666;">0.670</span>
+            </td>
+
+          </tr>
+
+        </tbody>
+
+      </table>
+
+      <!-- FOOT NOTE -->
+      <p style="
+          margin-top: 15px;
+          font-size: 13px;
+          color: #555;
+          text-align: center;
+      ">
+        V – Value | P – Probability
+      </p>
+
+    </div>
+
+  </div>
+
+</div>
+<!-- ===== END SECTION ===== -->
+
+    </div>
+  </div>
+</section>
+
+<!-- PROJECT -->
+<section id="project">
+  <div class="section-inner">
+    <div class="section-label">03 // Key Project</div>
+    <h2 class="section-title">Computational <em>Innovation</em></h2>
+    <div class="project-card reveal">
+      <div class="project-layout">
+        <div>
+          <div class="project-type" id="d-projType">Personal Project · 2025</div>
+          <h3 class="project-title" id="d-projTitle">Automated Reproducible RNA-Seq Analysis Pipeline</h3>
+          <p class="project-desc" id="d-projDesc">Built a fully containerized and reproducible end-to-end RNA-Seq analysis pipeline using Nextflow and Docker, enabling scalable, portable genomic analysis workflows. Validated on a CAR-T immunotherapy dataset spanning 4 conditions × 3 replicates with comprehensive quality control, alignment, quantification, and differential expression stages.</p>
+          <div class="pipeline-steps" id="d-pipeline">
+            <span class="pipeline-step">FastQC</span>
+            <span class="pipeline-arrow">→</span>
+            <span class="pipeline-step">Trim Galore</span>
+            <span class="pipeline-arrow">→</span>
+            <span class="pipeline-step">STAR</span>
+            <span class="pipeline-arrow">→</span>
+            <span class="pipeline-step">featureCounts</span>
+            <span class="pipeline-arrow">→</span>
+            <span class="pipeline-step">DESeq2</span>
+          </div>
+          <div class="project-tags" id="d-projTags">
+            <span class="tag">Nextflow</span><span class="tag">Docker</span><span class="tag">DESeq2</span>
+            <span class="tag">STAR Aligner</span><span class="tag">RNA-Seq</span><span class="tag">Volcano Plots</span>
+            <span class="tag">PCA</span><span class="tag">Heatmaps</span><span class="tag">CAR-T Dataset</span>
+          </div>
+          <a href="https://github.com/saravanank2503/Automated-Reproducible-RNA-SEQ-analysis-Pipeline-by-using-Nextflow-and-Docker-" target="_blank" class="project-link" id="d-projLink">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+            View on GitHub
+          </a>
+        </div>
+      <!-- RIGHT: PCA only -->
+        <div style="
+            background: #ffffff;
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+        ">
+          <div style="
+              background: linear-gradient(to bottom, #f8fafc, #eef4fb);
+              padding: 22px;
+              height: 340px;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+          ">
+            <img src="images/pca.jpg" alt="PCA"
+                 style="width:100%; height:100%; object-fit:contain; border-radius:10px; display:block;">
+          </div>
+          <div style="padding: 20px;">
+            <h4 style="margin:0 0 10px 0; color:#0d2b52; font-size:1.1rem; font-weight:700;">Principal Component Analysis (PCA)</h4>
+            <p style="margin:0; color:#4b5563; font-size:0.88rem; line-height:1.7;">PCA visualization demonstrating transcriptomic variance, replicate consistency, and condition-specific clustering across RNA-Seq datasets.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- HEATMAP: full width below project-layout -->
+    <div style="
+        margin-top: 30px;
+        background: #ffffff;
+        border-radius: 18px;
+        overflow: hidden;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+    ">
+      <div style="
+          background: linear-gradient(to bottom, #f8fafc, #eef4fb);
+          padding: 22px 22px 0 22px;
+          height: 1500px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+    ">
+      <img src="images/top50_degs_heatmap.jpg"
+           alt="Top 50 DEGs Heatmap"
+           style="
+              width: 100%;
+              height: 100%;
+              object-fit: contain;
+              object-position: center;
+                border-radius: 10px 10px 0 0;
+                display: block;
+             ">
+      </div>
+      <div style="padding: 24px;">
+        <h4 style="margin:0 0 14px 0; color:#0d2b52; font-size:1.25rem; font-weight:700;">Top 50 Differentially Expressed Genes Heatmap</h4>
+        <p style="margin:0; color:#4b5563; font-size:0.96rem; line-height:1.8;">Hierarchical clustering heatmap generated from DESeq2-normalized transcriptomic profiles showing differential expression patterns across CAR-T experimental groups and biological replicates.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-inner">
+    <div class="section-label">04 // Competencies</div>
+    <h2 class="section-title">Core <em>Skills</em> &amp; Expertise</h2>
+    
+    <div class="skills-grid" id="d-skillsGrid">
+      
+      <!-- 1. In Vivo Techniques -->
+      <div class="skill-card reveal">
+        <span class="skill-icon">🐀</span>
+        <div class="skill-cat">In Vivo Models</div>
+        <div class="skill-name">Animal Handling &amp; Experimentation</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Rat &amp; Mice Handling</span>
+          <span class="skill-tag">Animal Dissection</span>
+          <span class="skill-tag">Oral Gavage</span>
+          <span class="skill-tag">Intraperitoneal (IP) Injection</span>
+        </div>
+      </div>
+
+      <!-- 2. Cell Culture & In Vitro -->
+      <div class="skill-card reveal">
+        <span class="skill-icon">🧫</span>
+        <div class="skill-cat">Cell Culture &amp; In Vitro Models</div>
+        <div class="skill-name">Mammalian Cell Biology</div>
+        <div class="skill-tags">
+          <span class="skill-tag">HepG2 &amp; H9c2 Maintenance</span>
+          <span class="skill-tag">BSL-2 Aseptic Technique</span>
+          <span class="skill-tag">FFA-Induced Lipotoxicity Model</span>
+          <span class="skill-tag">MTT Viability Assay</span>
+          <span class="skill-tag">Nile Red &amp; DAPI Staining</span>
+        </div>
+      </div>
+
+      <!-- 3. Molecular Biology -->
+      <div class="skill-card reveal">
+        <span class="skill-icon">🧪</span>
+        <div class="skill-cat">Molecular Biology</div>
+        <div class="skill-name">Gene Expression &amp; Assay Development</div>
+        <div class="skill-tags">
+          <span class="skill-tag">RT-qPCR / qPCR (SYBR Green)</span>
+          <span class="skill-tag">mtDNA Copy Number Analysis</span>
+          <span class="skill-tag">Telomere Length (T/S Ratio)</span>
+          <span class="skill-tag">Multi-biomarker ELISA</span>
+          <span class="skill-tag">RNA/DNA Isolation (TRIzol + Column)</span>
+          <span class="skill-tag">Primer Design (Primer3 + BLAST)</span>
+          <span class="skill-tag">Western Blot</span>
+          <span class="skill-tag">NanoDrop &amp; Gel Electrophoresis</span>
+        </div>
+      </div>
+
+      <!-- 4. Bioinformatics & In Silico -->
+      <div class="skill-card reveal">
+        <span class="skill-icon">💻</span>
+        <div class="skill-cat">Bioinformatics &amp; Computational</div>
+        <div class="skill-name">In Silico Drug Discovery</div>
+        <div class="skill-tags">
+          <span class="skill-tag">AutoDock Vina Docking</span>
+          <span class="skill-tag">PyMOL Visualization</span>
+          <span class="skill-tag">SwissADME (Lipinski RO5)</span>
+          <span class="skill-tag">ADMET Profiling (admetSAR)</span>
+          <span class="skill-tag">LigPlot Interaction Analysis</span>
+        </div>
+      </div>
+
+      <!-- 5. Instrumentation -->
+      <div class="skill-card reveal">
+        <span class="skill-icon">🔬</span>
+        <div class="skill-cat">Instrumentation</div>
+        <div class="skill-name">Laboratory Equipment</div>
+        <div class="skill-tags">
+          <span class="skill-tag">QuantStudio RT-PCR System</span>
+          <span class="skill-tag">NanoDrop Spectrophotometer</span>
+          <span class="skill-tag">Fluorescence Microscopy</span>
+          <span class="skill-tag">CO₂ Incubator &amp; Laminar Flow</span>
+          <span class="skill-tag">Microplate Reader</span>
+        </div>
+      </div>
+
+      <!-- 6. Quality, Compliance &amp; Documentation -->
+      <div class="skill-card reveal">
+        <span class="skill-icon">📋</span>
+        <div class="skill-cat">Quality &amp; Compliance</div>
+        <div class="skill-name">GLP &amp; Scientific Communication</div>
+        <div class="skill-tags">
+          <span class="skill-tag">SOP Development &amp; Authorship</span>
+          <span class="skill-tag">GLP-Compliant Documentation</span>
+          <span class="skill-tag">Assay Validation &amp; Reproducibility</span>
+          <span class="skill-tag">Heavy Metal &amp; Biomarker Profiling</span>
+          <span class="skill-tag">Technical Report Writing</span>
+          <span class="skill-tag">Statistical Analysis &amp; Interpretation</span>
+          <span class="skill-tag">Reagent Traceability &amp; Calibration</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="section-inner">
+    <div class="section-label">05 // Education</div>
+    <h2 class="section-title">Academic <em>Foundation</em></h2>
+    <div class="edu-card reveal">
+      <div>
+        <div class="edu-degree" id="d-degree">M.Tech in Biotechnology</div>
+        <div class="edu-uni" id="d-uni">Bharathidasan University, Tiruchirappalli</div>
+        <div class="edu-dept" id="d-dept">Department of Biotechnology · School of Biotechnology &amp; Genetic Engineering</div>
+        <div class="edu-meta"><span id="d-programme">Integrated 6-Year Programme</span> &nbsp;·&nbsp; <span id="d-yearRange">2019 – 2025</span></div>
+      </div>
+      <div class="edu-cgpa">
+        <div class="cgpa-num" id="d-cgpa">7.6</div>
+        <div class="cgpa-label">CGPA / 10.0</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-inner">
+    <div class="section-label">06 // Contact</div>
+    <h2 class="section-title">Let's <em>Connect</em></h2>
+    <p class="contact-subtitle" id="d-contactSub">Open to research collaborations, biotech &amp; pharma opportunities</p>
+    <div class="contact-cards">
+      <a id="d-ccEmail" href="mailto:saravananmtech25@gmail.com" class="contact-card"><div class="contact-card-icon">✉️</div><div class="contact-card-label">Email</div><div class="contact-card-value" id="d-ccEmailVal">saravananmtech25@gmail.com</div></a>
+      <a id="d-ccPhone" href="tel:+918072104819" class="contact-card"><div class="contact-card-icon">📞</div><div class="contact-card-label">Phone</div><div class="contact-card-value" id="d-ccPhoneVal">+91 8072104819</div></a>
+      <a id="d-ccLI" href="https://www.linkedin.com/in/saravanank25" target="_blank" class="contact-card"><div class="contact-card-icon">💼</div><div class="contact-card-label">LinkedIn</div><div class="contact-card-value">saravanank25</div></a>
+      <a id="d-ccGH" href="https://github.com/saravanank2503" target="_blank" class="contact-card"><div class="contact-card-icon">⚗️</div><div class="contact-card-label">GitHub</div><div class="contact-card-value">saravanank2503</div></a>
+    </div>
+    <form action="https://api.web3forms.com/submit" method="POST" style="max-width:520px; margin:0 auto; display:flex; flex-direction:column; gap:1rem;">
+  <input type="hidden" name="access_key" value="d7044d3b-443a-46c4-9a50-e3647df0c993">
+  <input type="hidden" name="subject" value="New Portfolio Enquiry — Saravanan K">
+  <input type="text" name="name" placeholder="Your Name" required
+    style="padding:.85rem 1.2rem; border:1px solid rgba(255,255,255,.15); border-radius:3px; background:rgba(255,255,255,.06); color:#fff; font-family:'Outfit',sans-serif; font-size:.9rem; outline:none;">
+  <input type="email" name="email" placeholder="Your Email" required
+    style="padding:.85rem 1.2rem; border:1px solid rgba(255,255,255,.15); border-radius:3px; background:rgba(255,255,255,.06); color:#fff; font-family:'Outfit',sans-serif; font-size:.9rem; outline:none;">
+  <textarea name="message" placeholder="Your Message" rows="5" required
+    style="padding:.85rem 1.2rem; border:1px solid rgba(255,255,255,.15); border-radius:3px; background:rgba(255,255,255,.06); color:#fff; font-family:'Outfit',sans-serif; font-size:.9rem; outline:none; resize:vertical;"></textarea>
+  <button type="submit" class="btn-primary" style="align-self:center; min-width:200px;">Send Message</button>
+</form>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-text" id="d-footer">© 2025 Saravanan K · All rights reserved</div>
+  <a href="#hero" class="footer-back">↑ Back to top</a>
+</footer>
+
+<!-- ══════════════════════════════════════════
+     JAVASCRIPT
+══════════════════════════════════════════ -->
+<script>
+/* ─── NAV ─── */
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll',()=>navbar.classList.toggle('scrolled',scrollY>50));
+const navToggle = document.getElementById('navToggle');
+const navLinks  = document.getElementById('navLinks');
+navToggle.addEventListener('click',()=>navLinks.classList.toggle('open'));
+navLinks.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>navLinks.classList.remove('open')));
+
+/* ─── SCROLL REVEAL ─── */
+const revealEls = document.querySelectorAll('.reveal,.timeline-item');
+const obs = new IntersectionObserver((entries)=>{
+  entries.forEach((e,i)=>{ if(e.isIntersecting){ setTimeout(()=>e.target.classList.add('visible'),80*i); obs.unobserve(e.target); }});
+},{threshold:.12,rootMargin:'0px 0px -40px 0px'});
+revealEls.forEach(el=>obs.observe(el));
+
+/* ─── EDITOR PANEL ─── */
+const editBtn   = document.getElementById('editToggleBtn');
+const panel     = document.getElementById('editorPanel');
+editBtn.addEventListener('click',()=>{
+  panel.classList.toggle('open');
+  editBtn.classList.toggle('active');
+  editBtn.textContent = panel.classList.contains('open') ? '✕' : '✏️';
+});
+
+/* TABS */
+document.querySelectorAll('.ep-tab').forEach(tab=>{
+  tab.addEventListener('click',()=>{
+    document.querySelectorAll('.ep-tab').forEach(t=>t.classList.remove('active'));
+    document.querySelectorAll('.ep-section').forEach(s=>s.classList.remove('active'));
+    tab.classList.add('active');
+    document.getElementById('tab-'+tab.dataset.tab).classList.add('active');
+  });
+});
+
+/* ─── TOAST ─── */
+function showToast(msg='Changes applied!'){
+  const t=document.getElementById('toast');
+  t.textContent=msg; t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),2200);
+}
+
+/* ─── IMAGE UPLOADS ─── */
+function setupImgSlot(inputId, imgId, phId){
+  const input = document.getElementById(inputId);
+  const img   = document.getElementById(imgId);
+  const ph    = document.getElementById(phId);
+  if(!input) return;
+  input.addEventListener('change',e=>{
+    const file = e.target.files[0]; if(!file) return;
+    const reader = new FileReader();
+    reader.onload = ev=>{
+      img.src = ev.target.result;
+      img.style.display='block';
+      if(ph) ph.style.display='none';
+    };
+    reader.readAsDataURL(file);
+  });
+}
+
+// Hero profile
+setupImgSlot('profileSlotInput','profileImg','profilePlaceholder');
+setupImgSlot('profileUploadInput','profileImg','profilePlaceholder');
+// Panel preview sync
+document.getElementById('profileUploadInput').addEventListener('change',e=>{
+  const file=e.target.files[0]; if(!file) return;
+  const r=new FileReader();
+  r.onload=ev=>{
+    document.getElementById('profileZonePreview').src=ev.target.result;
+    document.getElementById('profileZonePreview').style.display='block';
+    // sync to slot
+    document.getElementById('profileSlotInput').dispatchEvent(new Event('change'));
+  };
+  r.readAsDataURL(file);
+});
+
+// Project images
+setupImgSlot('projImg1Input','projImg1','projImg1Ph');
+setupImgSlot('proj1UploadInput','projImg1','projImg1Ph');
+setupImgSlot('projImg2Input','projImg2','projImg2Ph');
+setupImgSlot('proj2UploadInput','projImg2','projImg2Ph');
+
+// Panel preview sync for project images
+['proj1UploadInput','proj2UploadInput'].forEach((id,i)=>{
+  document.getElementById(id).addEventListener('change',e=>{
+    const file=e.target.files[0]; if(!file) return;
+    const r=new FileReader();
+    const n=i+1;
+    r.onload=ev=>{
+      const prev=document.getElementById('proj'+n+'ZonePreview');
+      prev.src=ev.target.result; prev.style.display='block';
+    };
+    r.readAsDataURL(file);
+  });
+});
+
+/* ─── EXPERIENCE DATA ─── */
+let expData = [
+  {date:'Sep 2025 – Present', badge:'Current', current:true, role:'Research Associate', org:'Auxochromofours Solution Pvt Ltd, Bangalore', supervisor:'', highlights:['Executed 100+ high-frequency RT-PCR runs; maintained Ct CV <2%.','Designed custom PCR primers using Primer3 & NCBI Primer-BLAST, reducing non-specific amplification by ~30%.','Isolated RNA/DNA using TRIzol & column methods; NanoDrop and gel electrophoresis QC.','Developed & validated multi-biomarker ELISA panels, mtDNA copy number (qPCR), telomere length assays (T/S ratio).','Conducted heavy metal/trace element biomarker profiling.','Authored 9 SOPs; maintained GLP documentation, calibration logs & reagent traceability.','Generated detailed technical reports with statistical interpretation.']},
+  {date:'Dec 2024 – Apr 2025', badge:'Research Trainee', current:false, role:'Research Trainee', org:'THSTI, Faridabad', supervisor:'Supervised by Dr. Ruchi Tandon · In vitro NAFLD-associated cardiovascular disease model', highlights:['Maintained HepG2 and H9c2 cell lines under aseptic BSL-2 conditions.','Established NAFLD-CVD in vitro model using free fatty acid induction and Oil Red O staining.','Performed MTT & LDH cytotoxicity assays on >10 therapeutic compounds.','Conducted quantitative fluorescence microscopy (AX100).','Contributed to target validation and manuscript preparation.']},
+  {date:'May 2024 – Jun 2024', badge:'Research Intern', current:false, role:'Research Intern', org:'NCSCM, Anna University, Chennai', supervisor:'Supervised by Dr. V. Deepak Samuel · Computational antiviral drug discovery', highlights:['Molecular docking of marine alkaloids against viral targets using AutoDock Vina.','Evaluated ADMET profiles using SwissADME; 3D visualization using PyMOL.']},
+  {date:'Jan 2023 – May 2023', badge:'Student Researcher', current:false, role:'Student Researcher', org:'Manonmaniam Sundaranar University, Tirunelveli', supervisor:'Supervised by Dr. S. Umamaheshwari · Virtual screening for antidiabetic compounds', highlights:['Screened 50+ phenolic compounds against aldose reductase and alpha-glucosidase.','Identified top leads by binding free energy and interaction fingerprints.']}
+];
+
+/* ─── SKILL DATA ─── */
+let skillData = [
+  {icon:'🧬', cat:'Laboratory Techniques', name:'Molecular Biology', tags:'RT-PCR,qPCR,cDNA synthesis,Primer design,RNA/DNA isolation,TRIzol,NanoDrop,Gel electrophoresis,SDS-PAGE,Western blot,Fluorescence microscopy (AX100)'},
+  {icon:'🔬', cat:'Cell Biology', name:'Cell Culture & Assays', tags:'Mammalian cell culture,HepG2 / H9c2,BSL-2 protocols,MTT assay,LDH assay,Oil Red O staining,Aseptic technique,NAFLD-CVD model'},
+  {icon:'📊', cat:'Bioanalytical', name:'ELISA & Biomarkers', tags:'Multi-marker ELISA,Sandwich & competitive,Assay development,mtDNA copy number,Telomere T/S ratio,Heavy metal profiling,GraphPad Prism'},
+  {icon:'💻', cat:'Computational & Bioinformatics', name:'In Silico & Pipelines', tags:'AutoDock Vina,PyMOL,SwissADME,Nextflow,Docker,DESeq2,STAR,featureCounts,NCBI BLAST,Primer3,SnapGene,MEGA'},
+  {icon:'📋', cat:'Quality & Compliance', name:'GLP & Documentation', tags:'SOP authorship,GLP documentation,BSL-2 biosafety,Equipment calibration,Reagent traceability,Assay validation,Technical report writing'}
+];
+
+/* ─── RENDER EXPERIENCE EDITOR ─── */
+function renderExpEditor(){
+  const c=document.getElementById('exp-items-editor'); c.innerHTML='';
+  expData.forEach((exp,i)=>{
+    const div=document.createElement('div');
+    div.className='ep-repeat-item';
+    div.innerHTML=`
+      <button class="remove-btn" data-idx="${i}">✕</button>
+      <div class="ep-group"><label class="ep-label">Date Range</label><input class="ep-input" data-exp="${i}" data-field="date" value="${exp.date}"></div>
+      <div class="ep-group"><label class="ep-label">Badge Text</label><input class="ep-input" data-exp="${i}" data-field="badge" value="${exp.badge}"></div>
+      <div class="ep-group"><label class="ep-label">Role / Title</label><input class="ep-input" data-exp="${i}" data-field="role" value="${exp.role}"></div>
+      <div class="ep-group"><label class="ep-label">Organisation</label><input class="ep-input" data-exp="${i}" data-field="org" value="${exp.org}"></div>
+      <div class="ep-group"><label class="ep-label">Supervisor / Focus (optional)</label><input class="ep-input" data-exp="${i}" data-field="supervisor" value="${exp.supervisor}"></div>
+      <div class="ep-group"><label class="ep-label">Highlights (one per line)</label><textarea class="ep-textarea" data-exp="${i}" data-field="highlights" style="min-height:120px">${exp.highlights.join('\n')}</textarea></div>
+    `;
+    c.appendChild(div);
+  });
+  c.querySelectorAll('.remove-btn').forEach(btn=>{
+    btn.addEventListener('click',()=>{ expData.splice(+btn.dataset.idx,1); renderExpEditor(); });
+  });
+  c.querySelectorAll('[data-exp]').forEach(el=>{
+    el.addEventListener('input',()=>{
+      const i=+el.dataset.exp, f=el.dataset.field;
+      if(f==='highlights') expData[i][f]=el.value.split('\n');
+      else expData[i][f]=el.value;
+    });
+  });
+}
+
+/* ─── RENDER SKILL EDITOR ─── */
+function renderSkillEditor(){
+  const c=document.getElementById('skills-items-editor'); c.innerHTML='';
+  skillData.forEach((sk,i)=>{
+    const div=document.createElement('div');
+    div.className='ep-repeat-item';
+    div.innerHTML=`
+      <button class="remove-btn" data-idx="${i}">✕</button>
+      <div class="ep-group"><label class="ep-label">Icon (emoji)</label><input class="ep-input" data-sk="${i}" data-field="icon" value="${sk.icon}"></div>
+      <div class="ep-group"><label class="ep-label">Category</label><input class="ep-input" data-sk="${i}" data-field="cat" value="${sk.cat}"></div>
+      <div class="ep-group"><label class="ep-label">Name</label><input class="ep-input" data-sk="${i}" data-field="name" value="${sk.name}"></div>
+      <div class="ep-group"><label class="ep-label">Tags (comma-separated)</label><textarea class="ep-textarea" data-sk="${i}" data-field="tags">${sk.tags}</textarea></div>
+    `;
+    c.appendChild(div);
+  });
+  c.querySelectorAll('.remove-btn').forEach(btn=>{
+    btn.addEventListener('click',()=>{ skillData.splice(+btn.dataset.idx,1); renderSkillEditor(); });
+  });
+  c.querySelectorAll('[data-sk]').forEach(el=>{
+    el.addEventListener('input',()=>{ skillData[+el.dataset.sk][el.dataset.field]=el.value; });
+  });
+}
+
+document.getElementById('addExpBtn').addEventListener('click',()=>{
+  expData.push({date:'',badge:'',current:false,role:'',org:'',supervisor:'',highlights:['']});
+  renderExpEditor();
+});
+document.getElementById('addSkillBtn').addEventListener('click',()=>{
+  skillData.push({icon:'🔬',cat:'Category',name:'Skill Name',tags:'tag1,tag2'});
+  renderSkillEditor();
+});
+
+renderExpEditor();
+renderSkillEditor();
+
+/* ─── APPLY / SAVE ─── */
+document.getElementById('saveBtn').addEventListener('click',()=>{
+  // Hero
+  setText('d-heroEyebrow','e-heroEyebrow');
+  setHeroName();
+  setText('d-heroTitle','e-heroTitle');
+  setText('d-heroTagline','e-heroTagline');
+  document.getElementById('d-btn1').textContent=v('e-btn1Label');
+  document.getElementById('d-btn2').textContent=v('e-btn2Label');
+  document.getElementById('d-liLink').href=v('e-linkedin');
+  document.getElementById('d-ghLink').href=v('e-github');
+
+  // About
+  setText('d-aboutPara1','e-aboutPara1');
+  setText('d-aboutPara2','e-aboutPara2');
+  setText('d-aboutPara3','e-aboutPara3');
+  setText('d-location','e-location');
+  const em=v('e-email');
+  document.getElementById('d-emailLink').textContent=em;
+  document.getElementById('d-emailLink').href='mailto:'+em;
+  const ph=v('e-phone');
+  document.getElementById('d-phoneLink').textContent=ph;
+  document.getElementById('d-phoneLink').href='tel:'+ph.replace(/\s/g,'');
+  const li=v('e-linkedin');
+  document.getElementById('d-liText').textContent=li.replace('https://','');
+  document.getElementById('d-liText').href=li;
+  document.getElementById('d-ghText').textContent=v('e-github').replace('https://','');
+  document.getElementById('d-ghText').href=v('e-github');
+  document.getElementById('d-stat1n').innerHTML=v('e-stat1n');
+  document.getElementById('d-stat1l').textContent=v('e-stat1l');
+  document.getElementById('d-stat2n').innerHTML=v('e-stat2n');
+  document.getElementById('d-stat2l').textContent=v('e-stat2l');
+  document.getElementById('d-stat3n').innerHTML=v('e-stat3n');
+  document.getElementById('d-stat3l').textContent=v('e-stat3l');
+  document.getElementById('d-stat4n').innerHTML=v('e-stat4n');
+  document.getElementById('d-stat4l').textContent=v('e-stat4l');
+
+  // Experience
+  renderTimeline();
+
+  // Project
+  setText('d-projTitle','e-projTitle');
+  setText('d-projType','e-projType');
+  setText('d-projDesc','e-projDesc');
+  document.getElementById('d-projLink').href=v('e-projLink');
+  renderPipeline();
+  renderProjTags();
+
+  // Skills
+  renderSkillCards();
+
+  // Education
+  setText('d-degree','e-degree');
+  setText('d-uni','e-uni');
+  setText('d-dept','e-dept');
+  setText('d-programme','e-programme');
+  setText('d-yearRange','e-yearRange');
+  setText('d-cgpa','e-cgpa');
+
+  // Contact
+  setText('d-contactSub','e-contactSub');
+  const ce=v('e-contactEmail');
+  document.getElementById('d-ccEmail').href='mailto:'+ce;
+  document.getElementById('d-ccEmailVal').textContent=ce;
+  document.getElementById('d-emailBtn').href='mailto:'+ce;
+  const cp=v('e-contactPhone');
+  document.getElementById('d-ccPhone').href='tel:'+cp.replace(/\s/g,'');
+  document.getElementById('d-ccPhoneVal').textContent=cp;
+  document.getElementById('d-ccLI').href=v('e-contactLI');
+  document.getElementById('d-ccGH').href=v('e-contactGH');
+  setText('d-footer','e-footer');
+
+  showToast('Changes applied! ✓');
+});
+
+function v(id){ return document.getElementById(id).value; }
+function setText(domId, inputId){ document.getElementById(domId).textContent=v(inputId); }
+function setHeroName(){
+  const parts=v('e-heroName').split(' ');
+  const last=parts.pop();
+  document.getElementById('d-heroName').innerHTML=parts.join(' ')+' <span>'+last+'</span>';
+}
+
+function renderTimeline(){
+  const tl=document.getElementById('d-timeline'); tl.innerHTML='';
+  expData.forEach((exp,i)=>{
+    const div=document.createElement('div');
+    div.className='timeline-item visible';
+    div.innerHTML=`
+      <div class="timeline-dot"></div>
+      <div class="timeline-meta">
+        <span>${exp.date}</span>
+        <span class="meta-badge${i===0?' current':''}">${i===0?'● ':''  }${exp.badge}</span>
+      </div>
+      <div class="timeline-role">${exp.role}</div>
+      <div class="timeline-org">${exp.org}</div>
+      ${exp.supervisor?`<div class="timeline-supervisor">${exp.supervisor}</div>`:''}
+      <ul class="timeline-highlights">${exp.highlights.filter(h=>h.trim()).map(h=>`<li>${h}</li>`).join('')}</ul>
+    `;
+    tl.appendChild(div);
+  });
+}
+
+function renderPipeline(){
+  const steps=v('e-pipeline').split(',').map(s=>s.trim()).filter(Boolean);
+  const c=document.getElementById('d-pipeline'); c.innerHTML='';
+  steps.forEach((s,i)=>{
+    const sp=document.createElement('span');
+    sp.className='pipeline-step'; sp.textContent=s; c.appendChild(sp);
+    if(i<steps.length-1){ const arr=document.createElement('span'); arr.className='pipeline-arrow'; arr.textContent='→'; c.appendChild(arr); }
+  });
+}
+
+function renderProjTags(){
+  const tags=document.getElementById('e-projTags').value.split(',').map(t=>t.trim()).filter(Boolean);
+  const c=document.getElementById('d-projTags'); c.innerHTML='';
+  tags.forEach(t=>{ const sp=document.createElement('span'); sp.className='tag'; sp.textContent=t; c.appendChild(sp); });
+}
+
+function renderSkillCards(){
+  const grid=document.getElementById('d-skillsGrid'); grid.innerHTML='';
+  skillData.forEach(sk=>{
+    const tags=sk.tags.split(',').map(t=>t.trim()).filter(Boolean);
+    const card=document.createElement('div');
+    card.className='skill-card reveal visible';
+    card.innerHTML=`<span class="skill-icon">${sk.icon}</span><div class="skill-cat">${sk.cat}</div><div class="skill-name">${sk.name}</div><div class="skill-tags">${tags.map(t=>`<span class="skill-tag">${t}</span>`).join('')}</div>`;
+    grid.appendChild(card);
+  });
+}
+
+/* ─── EXPORT HTML ─── */
+document.getElementById('exportBtn').addEventListener('click',()=>{
+  const clone=document.documentElement.cloneNode(true);
+  // remove editor elements
+  clone.querySelector('#editorPanel')?.remove();
+  clone.querySelector('#editToggleBtn')?.remove();
+  clone.querySelector('#toast')?.remove();
+  // remove edit-mode styles
+  const html='<!DOCTYPE html>\n'+clone.outerHTML;
+  const blob=new Blob([html],{type:'text/html'});
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);
+  a.download='saravanan_portfolio_final.html';
+  a.click();
+  showToast('HTML exported! ✓');
+});
+</script>
+</body>
+</html>
