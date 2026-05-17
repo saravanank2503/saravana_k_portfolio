@@ -566,7 +566,7 @@ footer{background:var(--navy); border-top:1px solid rgba(255,255,255,.06); paddi
       </div>
       <div class="ep-group">
         <label class="ep-label">Button 2 Label</label>
-        <input class="ep-input" id="e-btn2Label" value="Contact Me">
+        <input class="ep-input" id="e-btn2Label" value="">
       </div>
       <div class="ep-group">
         <label class="ep-label">LinkedIn URL</label>
@@ -1590,6 +1590,7 @@ footer{background:var(--navy); border-top:1px solid rgba(255,255,255,.06); paddi
 </form>
   </div>
 </section>
+  <button id="editToggleBtn">✏️</button>
 
 <footer>
   <div class="footer-text" id="d-footer">© 2025 Saravanan K · All rights reserved</div>
@@ -1784,7 +1785,7 @@ document.getElementById('saveBtn').addEventListener('click',()=>{
   setText('d-heroTitle','e-heroTitle');
   setText('d-heroTagline','e-heroTagline');
   document.getElementById('d-btn1').textContent=v('e-btn1Label');
-  document.getElementById('').textContent=v('e-btn2Label');
+  document.getElementById('d-btn2').textContent=v('e-btn2Label');
   document.getElementById('d-liLink').href=v('e-linkedin');
   document.getElementById('d-ghLink').href=v('e-github');
 
