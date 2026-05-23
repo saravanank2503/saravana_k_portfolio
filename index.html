@@ -443,16 +443,18 @@ section{padding:6rem 3rem}
 
 /* ── SKILLS ── */
 #skills{background:var(--cream)}
-.skills-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:1.5rem}
-.skill-card{background:var(--white); border:1px solid var(--border); border-radius:8px; padding:2rem; transition:all .35s; position:relative; overflow:hidden}
-.skill-card::after{content:''; position:absolute; bottom:0; left:0; right:0; height:3px; background:linear-gradient(90deg,var(--blue),var(--cyan)); transform:scaleX(0); transform-origin:left; transition:transform .35s}
-.skill-card:hover{transform:translateY(-4px); box-shadow:0 16px 40px rgba(27,58,92,.12)}
-.skill-card:hover::after{transform:scaleX(1)}
-.skill-icon{font-size:2rem; margin-bottom:1rem; display:block}
-.skill-cat{font-family:'DM Mono',monospace; font-size:.7rem; color:var(--blue); text-transform:uppercase; letter-spacing:.15em; margin-bottom:.5rem}
-.skill-name{font-family:'Cormorant Garamond',serif; font-size:1.3rem; font-weight:600; color:var(--navy-mid); margin-bottom:1rem; line-height:1.2}
-.skill-tags{display:flex; flex-wrap:wrap; gap:.4rem}
-.skill-tag{font-size:.72rem; padding:.25rem .6rem; background:rgba(46,109,164,.07); border-radius:2px; color:var(--muted); border:1px solid rgba(46,109,164,.12)}
+.skills-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:1.6rem}
+.skill-card-wide{grid-column:1/-1; display:grid; grid-template-columns:auto 1fr; gap:0 2.2rem; align-items:start}
+.skill-card{background:var(--white); border:1px solid var(--border); border-radius:10px; padding:1.8rem 1.6rem 1.6rem; position:relative; overflow:hidden; transition:transform .35s cubic-bezier(.22,1,.36,1),box-shadow .35s,border-color .35s}
+.skill-card::before{content:''; position:absolute; top:0; left:0; right:0; height:3px; background:linear-gradient(90deg,var(--blue),var(--cyan)); transform:scaleX(0); transform-origin:left; transition:transform .4s cubic-bezier(.22,1,.36,1)}
+.skill-card:hover::before{transform:scaleX(1)}
+.skill-card:hover{transform:translateY(-5px); box-shadow:0 18px 44px rgba(27,58,92,.13); border-color:rgba(46,109,164,.28)}
+.skill-icon{font-size:2rem; line-height:1; display:block; margin-bottom:1rem}
+.skill-card-wide .skill-icon{font-size:2.4rem; margin-bottom:0; padding-top:.2rem}
+.skill-tag{font-family:'Outfit',sans-serif; font-size:.75rem; font-weight:500; padding:.32rem .75rem; background:rgba(13,31,53,.07); border:1px solid rgba(13,31,53,.15); border-radius:20px; color:var(--navy-mid); letter-spacing:0; transition:background .2s,color .2s,border-color .2s}.skill-subgroups{display:flex; flex-direction:column; gap:1rem}
+.skill-subgroup-label{font-family:'Outfit',sans-serif; font-size:.7rem; font-weight:600; color:var(--blue); text-transform:uppercase; letter-spacing:.08em; margin-bottom:.5rem; display:block; opacity:.9}
+@media(max-width:900px){.skills-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:580px){.skills-grid{grid-template-columns:1fr} .skill-card-wide{grid-template-columns:1fr} .skill-card-wide .skill-icon{margin-bottom:.8rem}}
 
 /* ── EDUCATION ── */
 #education{background:var(--cream-dark)}
@@ -864,6 +866,7 @@ footer{background:var(--navy); border-top:1px solid rgba(255,255,255,.06); paddi
         <div class="timeline-org">Auxochromofours Solution Pvt Ltd, Bangalore</div>
         <ul class="timeline-highlights">
           <li>Led the development and full validation of critical molecular assays, including multi-biomarker ELISA panels, mitochondrial DNA copy number (qPCR), and telomere length analysis (T/S ratio method), establishing robust inter-assay reproducibility controls and GLP-compliant documentation.</li>
+          <li>Validated CpG sites across multiple aging-associated genes for MspI-qPCR suitability using beta value thresholds, correlation analysis (age vs methylation), and MethPrimer-based bisulfite primer design — successfully obtaining amplifiable primers for one confirmed methylation-variable locus.</li>
           <li>Played a key role in biomarker profiling projects by defining analytical requirements for heavy metals and trace elements, outsourcing testing, and providing expert interpretation of laboratory reports to support client decision-making.</li>
           <li>Performed nucleic acid isolation (RNA and DNA) from diverse biological matrices using both TRIzol and column-based methods; conducted quality assessment using NanoDrop (A260/280 ratio) and gel electrophoresis.</li>
           <li>Executed 100+ high-frequency RT-PCR/qPCR runs while maintaining excellent reproducibility (Ct CV <2%); designed and optimized custom primers using Primer3 & NCBI Primer-BLAST, significantly reducing non-specific amplification.</li>
@@ -1452,98 +1455,165 @@ footer{background:var(--navy); border-top:1px solid rgba(255,255,255,.06); paddi
     <div class="section-label">04 // Competencies</div>
     <h2 class="section-title">Core <em>Skills</em> &amp; Expertise</h2>
     
-    <div class="skills-grid" id="d-skillsGrid">
-      
-      <!-- 1. In Vivo Techniques -->
-      <div class="skill-card reveal">
-        <span class="skill-icon">🐀</span>
-        <div class="skill-cat">In Vivo Models</div>
-        <div class="skill-name">Animal Handling &amp; Experimentation</div>
-        <div class="skill-tags">
-          <span class="skill-tag">Rat &amp; Mice Handling</span>
-          <span class="skill-tag">Animal Dissection</span>
-          <span class="skill-tag">Oral Gavage</span>
-          <span class="skill-tag">Intraperitoneal (IP) Injection</span>
-        </div>
-      </div>
+   <div class="skills-grid" id="d-skillsGrid">
 
-      <!-- 2. Cell Culture & In Vitro -->
-      <div class="skill-card reveal">
-        <span class="skill-icon">🧫</span>
-        <div class="skill-cat">Cell Culture &amp; In Vitro Models</div>
-        <div class="skill-name">Mammalian Cell Biology</div>
-        <div class="skill-tags">
-          <span class="skill-tag">HepG2 &amp; H9c2 Maintenance</span>
-          <span class="skill-tag">BSL-2 Aseptic Technique</span>
-          <span class="skill-tag">FFA-Induced Lipotoxicity Model</span>
-          <span class="skill-tag">MTT Viability Assay</span>
-          <span class="skill-tag">Nile Red &amp; DAPI Staining</span>
-        </div>
-      </div>
-
-      <!-- 3. Molecular Biology -->
-      <div class="skill-card reveal">
-        <span class="skill-icon">🧪</span>
-        <div class="skill-cat">Molecular Biology</div>
-        <div class="skill-name">Gene Expression &amp; Assay Development</div>
-        <div class="skill-tags">
-          <span class="skill-tag">RT-qPCR / qPCR (SYBR Green)</span>
-          <span class="skill-tag">mtDNA Copy Number Analysis</span>
-          <span class="skill-tag">Telomere Length (T/S Ratio)</span>
-          <span class="skill-tag">Multi-biomarker ELISA</span>
-          <span class="skill-tag">RNA/DNA Isolation (TRIzol + Column)</span>
-          <span class="skill-tag">Primer Design (Primer3 + BLAST)</span>
-          <span class="skill-tag">Western Blot</span>
-          <span class="skill-tag">NanoDrop &amp; Gel Electrophoresis</span>
-        </div>
-      </div>
-
-      <!-- 4. Bioinformatics & In Silico -->
-      <div class="skill-card reveal">
-        <span class="skill-icon">💻</span>
-        <div class="skill-cat">Bioinformatics &amp; Computational</div>
-        <div class="skill-name">In Silico Drug Discovery</div>
-        <div class="skill-tags">
-          <span class="skill-tag">AutoDock Vina Docking</span>
-          <span class="skill-tag">PyMOL Visualization</span>
-          <span class="skill-tag">SwissADME (Lipinski RO5)</span>
-          <span class="skill-tag">ADMET Profiling (admetSAR)</span>
-          <span class="skill-tag">LigPlot Interaction Analysis</span>
-        </div>
-      </div>
-
-      <!-- 5. Instrumentation -->
-      <div class="skill-card reveal">
-        <span class="skill-icon">🔬</span>
-        <div class="skill-cat">Instrumentation</div>
-        <div class="skill-name">Laboratory Equipment</div>
-        <div class="skill-tags">
-          <span class="skill-tag">QuantStudio RT-PCR System</span>
-          <span class="skill-tag">NanoDrop Spectrophotometer</span>
-          <span class="skill-tag">Fluorescence Microscopy</span>
-          <span class="skill-tag">CO₂ Incubator &amp; Laminar Flow</span>
-          <span class="skill-tag">Microplate Reader</span>
-        </div>
-      </div>
-
-      <!-- 6. Quality, Compliance &amp; Documentation -->
-      <div class="skill-card reveal">
-        <span class="skill-icon">📋</span>
-        <div class="skill-cat">Quality &amp; Compliance</div>
-        <div class="skill-name">GLP &amp; Scientific Communication</div>
-        <div class="skill-tags">
-          <span class="skill-tag">SOP Development &amp; Authorship</span>
-          <span class="skill-tag">GLP-Compliant Documentation</span>
-          <span class="skill-tag">Assay Validation &amp; Reproducibility</span>
-          <span class="skill-tag">Heavy Metal &amp; Biomarker Profiling</span>
-          <span class="skill-tag">Technical Report Writing</span>
-          <span class="skill-tag">Statistical Analysis &amp; Interpretation</span>
-          <span class="skill-tag">Reagent Traceability &amp; Calibration</span>
-        </div>
-      </div>
-
+  <!-- 1. Molecular Biology -->
+  <div class="skill-card reveal">
+    <span class="skill-icon">🧪</span>
+    <div class="skill-cat">Molecular Biology</div>
+    <div class="skill-name">Gene Expression &amp; Assay Development</div>
+    <div class="skill-tags">
+      <span class="skill-tag">RT-qPCR / qPCR (SYBR Green)</span>
+      <span class="skill-tag">mtDNA Copy Number Analysis</span>
+      <span class="skill-tag">Telomere Length (T/S Ratio)</span>
+      <span class="skill-tag">Multi-biomarker ELISA</span>
+      <span class="skill-tag">RNA/DNA Isolation (TRIzol + Column)</span>
+      <span class="skill-tag">Primer Design (Primer3 + BLAST)</span>
+      <span class="skill-tag">Western Blot</span>
+      <span class="skill-tag">NanoDrop &amp; Gel Electrophoresis</span>
     </div>
   </div>
+
+  <!-- 2. Cell Culture -->
+  <div class="skill-card reveal">
+    <span class="skill-icon">🧫</span>
+    <div class="skill-cat">Cell Culture &amp; In Vitro Models</div>
+    <div class="skill-name">Mammalian Cell Biology</div>
+    <div class="skill-tags">
+      <span class="skill-tag">HepG2 &amp; H9c2 Maintenance</span>
+      <span class="skill-tag">BSL-2 Aseptic Technique</span>
+      <span class="skill-tag">FFA-Induced Lipotoxicity Model</span>
+      <span class="skill-tag">MTT Viability Assay</span>
+      <span class="skill-tag">Nile Red &amp; DAPI Staining</span>
+    </div>
+  </div>
+  
+  <!-- 3. Epigenetics — full width, dark teal theme -->
+  <div class="skill-card skill-card-wide epigenetics reveal">
+    <span class="skill-icon">🧬</span>
+    <div>
+      <div class="skill-cat">Epigenetics &amp; Methylation</div>
+      <div class="skill-name">CpG Site Validation &amp; Methylation Analysis</div>
+      <div class="skill-subgroups">
+        <div>
+          <span class="skill-subgroup-label">Assay &amp; Statistical Methods</span>
+          <div class="skill-tags">
+            <span class="skill-tag">MspI-qPCR (MSP-qPCR)</span>
+            <span class="skill-tag">Beta Value Analysis</span>
+            <span class="skill-tag">R Value &amp; P Value Interpretation</span>
+            <span class="skill-tag">Age vs Beta Correlation Graphs</span>
+            <span class="skill-tag">Bisulfite Sequencing Concepts</span>
+          </div>
+        </div>
+        <div>
+          <span class="skill-subgroup-label">Gene Targets Validated</span>
+          <div class="skill-tags">
+            <span class="skill-tag">EVOLV2 — CpG Screened</span>
+            <span class="skill-tag">FHL2 — Primer Obtained (MethPrimer)</span>
+            <span class="skill-tag">TMRT1 — CpG Screened</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4. In Silico — full width -->
+  <div class="skill-card skill-card-wide reveal">
+    <span class="skill-icon">💻</span>
+    <div>
+      <div class="skill-cat">Bioinformatics &amp; Computational Biology</div>
+      <div class="skill-name">In Silico Drug Discovery &amp; Genomic Analysis</div>
+      <div class="skill-subgroups">
+        <div>
+          <span class="skill-subgroup-label">Molecular Docking</span>
+          <div class="skill-tags">
+            <span class="skill-tag">AutoDock Vina</span>
+            <span class="skill-tag">PyMOL Visualization</span>
+            <span class="skill-tag">SwissADME (Lipinski RO5)</span>
+            <span class="skill-tag">ADMET Profiling (admetSAR)</span>
+            <span class="skill-tag">LigPlot Interaction Analysis</span>
+          </div>
+        </div>
+        <div>
+          <span class="skill-subgroup-label">RNA-Seq &amp; Pipeline</span>
+          <div class="skill-tags">
+            <span class="skill-tag">Nextflow</span>
+            <span class="skill-tag">Docker</span>
+            <span class="skill-tag">STAR Aligner</span>
+            <span class="skill-tag">featureCounts</span>
+            <span class="skill-tag">DESeq2</span>
+            <span class="skill-tag">FastQC / Trim Galore</span>
+          </div>
+        </div>
+        <div>
+          <span class="skill-subgroup-label">Programming &amp; Statistics</span>
+          <div class="skill-tags">
+            <span class="skill-tag">Python</span>
+            <span class="skill-tag">R (ggplot2 · Visualization)</span>
+            <span class="skill-tag">GraphPad Prism (Statistics &amp; Graphs)</span>
+            <span class="skill-tag">Volcano Plots</span>
+            <span class="skill-tag">PCA</span>
+            <span class="skill-tag">Heatmaps</span>
+            <span class="skill-tag">Dose-Response Curves (IC50)</span>
+          </div>
+        </div>
+        <div>
+          <span class="skill-subgroup-label">Databases &amp; Tools</span>
+          <div class="skill-tags">
+            <span class="skill-tag">NCBI BLAST</span>
+            <span class="skill-tag">PubChem</span>
+            <span class="skill-tag">RCSB-PDB</span>
+            <span class="skill-tag">Primer3</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5. In Vivo -->
+  <div class="skill-card reveal">
+    <span class="skill-icon">🐀</span>
+    <div class="skill-cat">In Vivo Models</div>
+    <div class="skill-name">Animal Handling &amp; Experimentation</div>
+    <div class="skill-tags">
+      <span class="skill-tag">Rat &amp; Mice Handling</span>
+      <span class="skill-tag">Animal Dissection</span>
+      <span class="skill-tag">Oral Gavage</span>
+      <span class="skill-tag">Intraperitoneal (IP) Injection</span>
+    </div>
+  </div>
+
+  <!-- 6. Quality & Compliance -->
+  <div class="skill-card reveal">
+    <span class="skill-icon">📋</span>
+    <div class="skill-cat">Quality &amp; Compliance</div>
+    <div class="skill-name">GLP &amp; Scientific Communication</div>
+    <div class="skill-tags">
+      <span class="skill-tag">SOP Development &amp; Authorship</span>
+      <span class="skill-tag">GLP-Compliant Documentation</span>
+      <span class="skill-tag">Assay Validation &amp; Reproducibility</span>
+      <span class="skill-tag">Heavy Metal &amp; Biomarker Profiling</span>
+      <span class="skill-tag">Technical Report Writing</span>
+      <span class="skill-tag">Statistical Analysis</span>
+      <span class="skill-tag">Reagent Traceability &amp; Calibration</span>
+    </div>
+  </div>
+
+  <!-- 7. Instrumentation -->
+  <div class="skill-card reveal">
+    <span class="skill-icon">🔬</span>
+    <div class="skill-cat">Instrumentation</div>
+    <div class="skill-name">Laboratory Equipment</div>
+    <div class="skill-tags">
+      <span class="skill-tag">QuantStudio RT-PCR System & CFX Opus 96 Dx</span>
+      <span class="skill-tag">NanoDrop Spectrophotometer</span>
+      <span class="skill-tag">Fluorescence Microscopy</span>
+      <span class="skill-tag">CO₂ Incubator &amp; Laminar Flow</span>
+      <span class="skill-tag">Tecan plate Reader</span>
+    </div>
+  </div>
+
+</div>
 </section>
 
 <!-- EDUCATION -->
