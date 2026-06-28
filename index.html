@@ -1442,7 +1442,114 @@ footer{background:var(--navy); border-top:1px solid rgba(255,255,255,.06); paddi
         <p style="margin:0; color:#4b5563; font-size:0.96rem; line-height:1.8;">Hierarchical clustering heatmap generated from DESeq2-normalized transcriptomic profiles showing differential expression patterns across CAR-T experimental groups and biological replicates.</p>
       </div>
     </div>
+<!-- CAR-T SCRNA-SEQ PROJECT CARD -->
+    <div class="project-card reveal" style="margin-top: 40px;">
+      <div class="project-layout">
 
+        <!-- LEFT: Text content -->
+        <div>
+          <div class="project-type">Personal Project · 2026</div>
+          <h3 class="project-title">CAR-T Single-Cell Atlas Re-analysis</h3>
+          <p class="project-desc">Independent re-analysis of GSE262072 — a landmark Nature 2024 paper profiling 695,819 CAR-T cells from 82 pediatric ALL patients and 6 healthy donors using Seurat v5 in a reproducible Docker environment. Reproduced UMAP clustering, identified TCF7+ memory progenitor enrichment in 8-year remission patients, and confirmed LAG3/PDCD1 exhaustion signatures in relapsed patients across 9 clusters.</p>
+
+          <!-- Pipeline steps — same style as RNA-Seq card -->
+          <div class="pipeline-steps">
+            <span class="pipeline-step">Load RDS</span>
+            <span class="pipeline-arrow">→</span>
+            <span class="pipeline-step">QC & Normalize</span>
+            <span class="pipeline-arrow">→</span>
+            <span class="pipeline-step">PCA</span>
+            <span class="pipeline-arrow">→</span>
+            <span class="pipeline-step">Clustering</span>
+            <span class="pipeline-arrow">→</span>
+            <span class="pipeline-step">UMAP</span>
+            <span class="pipeline-arrow">→</span>
+            <span class="pipeline-step">Marker Analysis</span>
+          </div>
+
+          <!-- Tags — same style -->
+          <div class="project-tags">
+            <span class="tag">Seurat v5</span>
+            <span class="tag">R</span>
+            <span class="tag">Docker</span>
+            <span class="tag">scRNA-seq</span>
+            <span class="tag">UMAP</span>
+            <span class="tag">T Cell Exhaustion</span>
+            <span class="tag">CAR-T Biology</span>
+            <span class="tag">Nature 2024</span>
+            <span class="tag">GSE262072</span>
+            <span class="tag">695,819 Cells</span>
+          </div>
+
+          <!-- GitHub link — same style -->
+          <a href="https://github.com/saravanank2503/CAR-T-scRNAseq-Reanalysis" target="_blank" class="project-link">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+            View on GitHub
+          </a>
+        </div>
+
+        <!-- RIGHT: UMAP patient group image — same style as PCA card -->
+        <div style="
+            background: #ffffff;
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+        ">
+          <div style="
+              background: linear-gradient(to bottom, #f8fafc, #eef4fb);
+              padding: 22px;
+              height: 340px;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+          ">
+            <img src="images/umap_patient_group.png"
+                 alt="UMAP colored by patient group"
+                 style="width:100%; height:100%; object-fit:contain; border-radius:10px; display:block;">
+          </div>
+          <div style="padding: 20px;">
+            <h4 style="margin:0 0 10px 0; color:#0d2b52; font-size:1.1rem; font-weight:700;">UMAP — Patient Group Clustering</h4>
+            <p style="margin:0; color:#4b5563; font-size:0.88rem; line-height:1.7;">UMAP clustering of 50,000 CAR-T cells colored by patient outcome group — Remission, Disease, and Healthy donors. Dataset: GSE262072, Nature 2024.</p>
+          </div>
+        </div>
+
+      </div><!-- /project-layout -->
+
+      <!-- SPLIT UMAP: full width below — same style as heatmap -->
+      <div style="
+          margin-top: 30px;
+          background: #ffffff;
+          border-radius: 18px;
+          overflow: hidden;
+          box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+      ">
+        <div style="
+            background: linear-gradient(to bottom, #f8fafc, #eef4fb);
+            padding: 22px 22px 0 22px;
+            height: 500px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        ">
+          <img src="images/umap_split_outcome.png"
+               alt="UMAP split by patient outcome"
+               style="
+                  width: 100%;
+                  height: 100%;
+                  object-fit: contain;
+                  object-position: center;
+                  border-radius: 10px 10px 0 0;
+                  display: block;
+               ">
+        </div>
+        <div style="padding: 24px;">
+          <h4 style="margin:0 0 14px 0; color:#0d2b52; font-size:1.25rem; font-weight:700;">Split UMAP by Patient Outcome</h4>
+          <p style="margin:0; color:#4b5563; font-size:0.96rem; line-height:1.8;">Side-by-side UMAP split by patient outcome reveals distinct immune cell distributions — remission patients show enrichment in memory clusters 5, 6, 7 (TCF7+ progenitor signature) while disease patients concentrate in exhausted clusters 2 and 3 (LAG3/PDCD1 co-expression).</p>
+        </div>
+      </div>
+
+    </div><!-- /project-card CAR-T -->
   </div>
 </section>
     </div>
